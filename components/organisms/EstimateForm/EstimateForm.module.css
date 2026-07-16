@@ -1,0 +1,659 @@
+/* ─── Estimate wizard — base (light) variant ─────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stepMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.stepCount {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  font-weight: 600;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 4px;
+  border-radius: 100px;
+  background: rgba(0, 55, 96, 0.08);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 100px;
+  background: var(--color-accent-teal);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+}
+
+.stepHint {
+  font-size: 13px;
+  color: rgba(0, 55, 96, 0.6);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: rgba(0, 55, 96, 0.6);
+  font-weight: 500;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--color-navy);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: inherit;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--color-accent-teal);
+  box-shadow: 0 0 0 3px rgba(158, 207, 132, 0.15);
+}
+
+.select option {
+  background-color: #ffffff;
+  color: var(--color-navy);
+}
+
+.textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.textarea::placeholder {
+  color: #b0b7bf;
+  line-height: 1.9;
+}
+
+/* Property type pills (Step 3) */
+.typeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.typePill {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.typePill:hover {
+  border-color: var(--color-accent-teal);
+}
+
+.typePillActive {
+  border-color: var(--color-accent-teal);
+  background: rgba(158, 207, 132, 0.12);
+  box-shadow: 0 0 0 3px rgba(158, 207, 132, 0.15);
+  font-weight: 600;
+}
+
+/* Service checkboxes (Step 4) */
+.serviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.serviceItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.serviceItem:hover {
+  border-color: var(--color-accent-teal);
+}
+
+.serviceItemActive {
+  border-color: var(--color-accent-teal);
+  background: rgba(158, 207, 132, 0.12);
+}
+
+.serviceCheckbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.serviceCheckmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.serviceItemActive .serviceCheckmark {
+  background: var(--color-accent-teal);
+  border-color: var(--color-accent-teal);
+  color: #ffffff;
+}
+
+/* Estimate method radio cards (Step 5) */
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.optionCard:hover {
+  border-color: var(--color-accent-teal);
+}
+
+.optionCardActive {
+  border-color: var(--color-accent-teal);
+  background: rgba(158, 207, 132, 0.12);
+}
+
+.optionRadio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.optionDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #d1d5db;
+  background: #ffffff;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.optionCardActive .optionDot {
+  border: 5px solid var(--color-accent-teal);
+}
+
+.optionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.optionTag {
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(0, 55, 96, 0.55);
+  margin-left: 6px;
+}
+
+.fileInput {
+  width: 100%;
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: rgba(0, 55, 96, 0.7);
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.helperNote {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(0, 55, 96, 0.65);
+  background: #f9fafb;
+  border-left: 3px solid var(--color-accent-teal);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 14px;
+}
+
+/* Step navigation buttons */
+.navRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.backBtn {
+  background: rgba(0, 55, 96, 0.05);
+  border: 1px solid rgba(0, 55, 96, 0.1);
+  color: var(--color-navy);
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.backBtn:hover {
+  background: rgba(0, 55, 96, 0.1);
+}
+
+.submitBtn {
+  background: var(--color-accent-teal);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+}
+
+.submitBtn:hover {
+  background-color: var(--color-accent-teal-hover);
+}
+
+/* Success Card */
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  background: rgba(52, 168, 83, 0.08);
+  border: 1px solid rgba(52, 168, 83, 0.2);
+  border-radius: 20px;
+  padding: 36px 24px;
+  color: var(--color-navy);
+}
+
+.successIcon {
+  color: #34A853;
+  flex-shrink: 0;
+}
+
+.successHeading {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.successText {
+  font-size: 14px;
+  color: rgba(0, 55, 96, 0.7);
+  line-height: 1.5;
+}
+
+.successCloseBtn {
+  background: rgba(0, 55, 96, 0.05);
+  border: 1px solid rgba(0, 55, 96, 0.1);
+  color: var(--color-navy);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 12px;
+}
+
+.successCloseBtn:hover {
+  background: var(--color-navy);
+  color: #ffffff;
+}
+
+/* ─── Glass variant — transparent over the hero video ────────────────── */
+.form.glass {
+  gap: 10px;
+}
+
+.glass .stepMeta {
+  gap: 7px;
+  margin-bottom: 2px;
+}
+
+.glass .stepCount {
+  color: #9ECF84;
+}
+
+.glass .progressTrack {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.glass .progressFill {
+  background: #9ECF84;
+}
+
+.glass .stepTitle {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.glass .stepHint {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+}
+
+.glass .inputGroup {
+  gap: 5px;
+}
+
+.glass .fieldLabel {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 10px;
+}
+
+.glass .row {
+  gap: 7px;
+}
+
+.glass .input,
+.glass .select,
+.glass .textarea {
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 12.5px;
+  color: #ffffff;
+}
+
+.glass .input::placeholder,
+.glass .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.glass .input:focus,
+.glass .select:focus,
+.glass .textarea:focus {
+  border-color: #9ECF84;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+
+.glass .select option {
+  background: #0f1e2e;
+  color: #ffffff;
+}
+
+.glass .textarea {
+  min-height: 150px;
+}
+
+.glass .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+}
+
+.glass .typeGrid {
+  gap: 7px;
+}
+
+.glass .typePill {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 12.5px;
+  color: #ffffff;
+}
+
+.glass .typePill:hover {
+  border-color: #9ECF84;
+}
+
+.glass .typePillActive {
+  border-color: #9ECF84;
+  background: rgba(158, 207, 132, 0.15);
+  box-shadow: none;
+}
+
+.glass .serviceList {
+  gap: 7px;
+}
+
+.glass .serviceItem {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  padding: 9px 11px;
+  font-size: 12.5px;
+  color: #ffffff;
+}
+
+.glass .serviceItem:hover {
+  border-color: #9ECF84;
+}
+
+.glass .serviceItemActive {
+  border-color: #9ECF84;
+  background: rgba(158, 207, 132, 0.15);
+}
+
+.glass .serviceCheckmark {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  width: 17px;
+  height: 17px;
+}
+
+.glass .serviceItemActive .serviceCheckmark {
+  background: #9ECF84;
+  border-color: #9ECF84;
+  color: #0f1e2e;
+}
+
+.glass .optionList {
+  gap: 7px;
+}
+
+.glass .optionCard {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  padding: 10px 11px;
+}
+
+.glass .optionCard:hover {
+  border-color: #9ECF84;
+}
+
+.glass .optionCardActive {
+  border-color: #9ECF84;
+  background: rgba(158, 207, 132, 0.15);
+}
+
+.glass .optionDot {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  width: 16px;
+  height: 16px;
+}
+
+.glass .optionCardActive .optionDot {
+  border: 5px solid #9ECF84;
+}
+
+.glass .optionTitle {
+  color: #ffffff;
+  font-size: 12.5px;
+}
+
+.glass .optionTag {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.glass .fileInput {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 9px;
+  padding: 10px 11px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.glass .helperNote {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #9ECF84;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  padding: 9px 11px;
+}
+
+.glass .navRow {
+  gap: 7px;
+  margin-top: 3px;
+}
+
+.glass .backBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-size: 12.5px;
+}
+
+.glass .backBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.glass .submitBtn {
+  background: #ffffff;
+  color: var(--color-navy, #003760);
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glass .submitBtn:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Glass success state */
+.successMessage.glass {
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  color: #ffffff;
+}
+
+.successMessage.glass .successIcon,
+.glass .successIcon {
+  color: #9ECF84;
+}
+
+.successMessage.glass .successHeading {
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.successMessage.glass .successText {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.successMessage.glass .successCloseBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 7px 16px;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.successMessage.glass .successCloseBtn:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  background: transparent;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .glass .row {
+    gap: 7px;
+    grid-template-columns: 1fr 1fr;
+  }
+}

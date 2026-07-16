@@ -1,0 +1,53 @@
+.section {
+  background-color: #f7f7f5; /* Theme background */
+  color: var(--color-navy);
+  overflow: hidden;
+  padding-block: clamp(40px, 5vh, 64px); /* Sleek vertical padding */
+  white-space: nowrap;
+  border-top: 1px solid rgba(15, 30, 46, 0.04);
+  border-bottom: 1px solid rgba(15, 30, 46, 0.04);
+  z-index: 5;
+  position: relative;
+}
+
+.track {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee-double 25s linear infinite; /* Seamless speed pace */
+  will-change: transform;
+}
+
+.item {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px); /* Compacted display size to read the whole text easily */
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  color: var(--color-navy);
+  text-transform: uppercase;
+}
+
+@keyframes marquee-double {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%); /* Seamless loop resetting after the first phrase slides out */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .item {
+    white-space: normal;
+    text-align: center;
+    padding-inline: 24px;
+  }
+}

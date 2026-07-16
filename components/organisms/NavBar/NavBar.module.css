@@ -1,0 +1,320 @@
+.header {
+  position: fixed;
+  top: 48px; /* Aligns inside the inset video frame */
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  padding: 0;
+  transition: all var(--transition-smooth);
+}
+
+.homeHeader {
+  animation: navFadeDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.8s both;
+}
+
+.subHeader {
+  animation: navFadeDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes navFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  .header {
+    top: 16px; /* Aligns inside the smaller mobile frame */
+  }
+}
+
+.navWrapper {
+  width: 100%;
+  transition: var(--transition-smooth);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height-normal);
+  padding: 0 var(--spacing-container-x);
+  transition: all var(--transition-smooth);
+  margin: 0 auto;
+  max-width: var(--layout-max-width);
+  width: 100%;
+  background: transparent;
+  border-radius: 0;
+  border: 1px solid transparent;
+}
+
+/* Scrolled Morphing State */
+.scrolled {
+  top: 16px !important; /* Floating pill position */
+}
+
+.scrolled .navbar {
+  max-width: 1000px;
+  width: calc(100% - 40px);
+  height: var(--nav-height-scrolled);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--border-radius-lg);
+  border-color: rgba(15, 30, 46, 0.07);
+  box-shadow: 0 12px 30px rgba(15, 30, 46, 0.05);
+  padding: 0 24px;
+}
+
+/* Logo Styling */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.logoImg {
+  height: clamp(38px, 5vh, 46px);
+  width: auto;
+  object-fit: contain;
+  display: none; /* Hide image by default in transparent mode */
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 100px;
+  box-shadow: 0 4px 12px rgba(15, 30, 46, 0.08);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  display: block; /* Show text by default in transparent mode */
+  transition: color var(--transition-smooth);
+}
+
+.logo:hover .logoImg {
+  transform: scale(1.03) translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 30, 46, 0.12);
+}
+
+.logo:hover .logoText {
+  color: var(--color-accent-teal);
+}
+
+/* Scrolled state toggles */
+.scrolled .logoText {
+  display: none !important;
+}
+
+.scrolled .logoImg {
+  display: block !important;
+}
+
+/* Navigation Links (Desktop) */
+.navLinks {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.navLink {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--color-navy);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  transition: all var(--transition-fast);
+}
+
+.navLink:hover {
+  background: rgba(0, 168, 150, 0.06);
+  color: var(--color-accent-teal);
+}
+
+/* Actions */
+.navActions {
+  display: flex;
+  align-items: center;
+}
+
+.ctaButton {
+  background: var(--color-accent-teal);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  font-size: var(--text-body-sm);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 168, 150, 0.2);
+  transition: all var(--transition-fast);
+  display: inline-block;
+  text-align: center;
+}
+
+.ctaButton:hover {
+  background: var(--color-accent-teal-hover);
+  box-shadow: 0 6px 20px rgba(0, 168, 150, 0.3);
+  transform: translateY(-1.5px);
+  color: #ffffff;
+}
+
+.ctaButton:active {
+  transform: translateY(0.5px);
+}
+
+/* Hamburger (Mobile Toggle) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 0;
+}
+
+.hamburgerLine {
+  width: 100%;
+  height: 2px;
+  background: var(--color-navy);
+  border-radius: 2px;
+  transition: all var(--transition-smooth);
+}
+
+.hamburgerActive .hamburgerLine:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburgerActive .hamburgerLine:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.hamburgerActive .hamburgerLine:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Drawer */
+.mobileDrawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 998;
+  transform: translateY(-100%);
+  transition: transform var(--transition-slow);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileDrawerActive {
+  transform: translateY(0);
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 280px;
+  align-items: center;
+}
+
+.mobileNavLink {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  transition: var(--transition-fast);
+  padding: 8px 0;
+}
+
+.mobileNavLink:hover {
+  color: var(--color-accent-teal);
+}
+
+.mobileCta {
+  width: 100%;
+  margin-top: 16px;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .navLinks,
+  .navActions {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobileDrawer {
+    display: flex;
+  }
+
+  /* No white bar on mobile — logo and hamburger float on their own */
+  .scrolled .navbar {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+    box-shadow: none;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 var(--spacing-container-x);
+  }
+
+  /* Floating white capsule keeps the hamburger visible over the video */
+  .hamburger {
+    box-sizing: border-box;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(15, 30, 46, 0.12);
+    padding: 13px 9px;
+  }
+
+  .hamburgerLine {
+    background: var(--color-navy);
+  }
+}
+
+/* Inverted Header Styles (when Transparent — matches bright or dark videos) */
+.header:not(.scrolled) .logoText {
+  color: #003760;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.6);
+}
+
+.header:not(.scrolled) .navLink {
+  color: #003760;
+  text-shadow: 0 1px 3px rgba(255,255,255,0.5);
+}
+
+.header:not(.scrolled) .navLink:hover {
+  color: var(--color-accent-teal);
+  background: rgba(0, 55, 96, 0.06);
+  text-shadow: none;
+}
+
+.header:not(.scrolled) .hamburgerLine {
+  background: #003760;
+}

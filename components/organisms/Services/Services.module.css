@@ -1,0 +1,205 @@
+.section {
+  position: relative;
+  height: 250vh; /* Scroll runway for horizontal card slides */
+  background-color: #f7f7f5; /* Bone-white clean canvas */
+  color: var(--color-navy);
+  z-index: 5;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.03);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(48px, 6vh, 64px);
+  padding-bottom: clamp(32px, 4vh, 48px);
+  justify-content: flex-start;
+}
+
+/* Header */
+.header {
+  max-width: 720px;
+}
+
+.label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem); /* Slightly downsized to save vertical room */
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.highlightText {
+  position: relative;
+  color: var(--color-accent-yellow); /* Yellow text */
+  font-weight: 600;
+  display: inline-block;
+}
+
+.highlightText::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--color-accent-teal); /* Teal underline */
+  z-index: -1;
+  opacity: 0.8;
+  border-radius: 2px;
+}
+
+.subtitleLead {
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: rgba(15, 30, 46, 0.75);
+}
+
+/* Track Container */
+.trackContainer {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin-top: clamp(24px, 4vh, 40px); /* Compacted gap to fit viewport */
+  margin-bottom: auto;
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  width: max-content;
+  padding-left: max(24px, calc((100vw - 1200px) / 2 + 24px));
+  padding-right: 80px;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Card Design */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 30, 46, 0.06);
+  border-radius: 24px;
+  padding: 32px; /* More compact padding */
+  display: flex;
+  flex-direction: column;
+  width: 420px; /* Snug width for perfect viewport proportion */
+  flex-shrink: 0;
+  transition: all var(--transition-smooth);
+  will-change: transform, border-color, box-shadow;
+}
+
+.card:hover {
+  border-color: var(--color-accent-teal);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(15, 30, 46, 0.06);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.iconWrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(0, 168, 150, 0.08);
+  color: var(--color-accent-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardIndex {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(15, 30, 46, 0.35);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.cardDescription {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(15, 30, 46, 0.7);
+  margin-bottom: 20px;
+  min-height: 64px;
+}
+
+/* Feature checklist styling */
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15, 30, 46, 0.06);
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-navy);
+}
+
+.checkIcon {
+  color: var(--color-accent-teal);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 960px) {
+  /* Same sticky + scroll-driven horizontal slide as desktop —
+     one line of cards passing as the page scrolls */
+  .track {
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+  }
+
+  .card {
+    width: min(310px, 82vw); /* Snug width for mobile slider card */
+    padding: 26px;
+    flex-shrink: 0;
+  }
+
+  .cardDescription {
+    min-height: auto;
+  }
+
+  .header {
+    padding-right: 20px;
+  }
+}

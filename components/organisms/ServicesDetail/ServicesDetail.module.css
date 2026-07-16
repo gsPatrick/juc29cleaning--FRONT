@@ -1,0 +1,313 @@
+.section {
+  position: relative;
+  background-color: #ffffff; /* Contrast canvas breakout */
+  color: var(--color-navy);
+  padding: clamp(80px, 12vh, 160px) 0;
+  z-index: 5;
+  border-top: 1px solid rgba(15, 30, 46, 0.05);
+}
+
+/* Header */
+.header {
+  max-width: 720px;
+  margin-bottom: clamp(32px, 5vh, 48px);
+}
+
+.label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  font-weight: 500;
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
+}
+
+.tabBar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid rgba(15, 30, 46, 0.06);
+  padding-bottom: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.tabBar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.tabPill {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: rgba(15, 30, 46, 0.5);
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.tabPill:hover {
+  color: var(--color-navy);
+}
+
+.activePill {
+  background: rgba(15, 30, 46, 0.04) !important;
+  border-color: rgba(15, 30, 46, 0.08);
+  color: var(--color-navy);
+  box-shadow: 0 4px 12px rgba(15, 30, 46, 0.02);
+}
+
+/* Asymmetrical 3-Column Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Card 1: Solid Color Testimonial Quote */
+.quoteCard {
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 480px;
+  transition: background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.quoteText {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--color-navy);
+  letter-spacing: -0.01em;
+}
+
+.quoteFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(15, 30, 46, 0.08);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.authorName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.authorRole {
+  font-size: 12px;
+  color: rgba(15, 30, 46, 0.6);
+}
+
+.brandBadge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-accent-teal);
+  border: 1px solid rgba(0, 168, 150, 0.2);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Card 2: Vertical Image Frame */
+.imageCard {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  min-height: 480px;
+  box-shadow: 0 10px 30px rgba(15, 30, 46, 0.03);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.imageCard:hover .image {
+  transform: scale(1.03);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 30, 46, 0) 60%, rgba(15, 30, 46, 0.05) 100%);
+  pointer-events: none;
+}
+
+/* Column 3: Stacked Stats & Button Card */
+.stackColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.statCard {
+  background: rgba(15, 30, 46, 0.02);
+  border: 1px solid rgba(15, 30, 46, 0.04);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.statCard:hover {
+  background: rgba(15, 30, 46, 0.03);
+  border-color: rgba(15, 30, 46, 0.06);
+}
+
+.statNumber {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 500;
+  color: var(--color-navy);
+  line-height: 1;
+}
+
+.statText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(15, 30, 46, 0.7);
+}
+
+/* Dark CTA Button Card */
+.ctaCard {
+  background: var(--color-navy);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  min-height: 100px;
+}
+
+.ctaCard:hover {
+  background: var(--color-accent-teal);
+  box-shadow: 0 12px 30px rgba(0, 168, 150, 0.15);
+}
+
+.ctaText {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.ctaArrow {
+  color: #ffffff;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  flex-shrink: 0;
+}
+
+.ctaCard:hover .ctaArrow {
+  transform: translateX(6px);
+}
+
+/* Explore All Link Bar */
+.exploreBar {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(48px, 6vh, 64px);
+}
+
+.exploreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--color-navy);
+  border-bottom: 2px solid var(--color-accent-teal);
+  padding-bottom: 6px;
+  transition: all 0.3s ease;
+}
+
+.exploreLink:hover {
+  color: var(--color-accent-teal);
+  border-bottom-color: var(--color-navy);
+}
+
+.exploreArrow {
+  transition: transform 0.3s ease;
+}
+
+.exploreLink:hover .exploreArrow {
+  transform: translateX(4px);
+}
+
+/* Responsiveness overrides */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .quoteCard,
+  .imageCard {
+    min-height: 380px;
+  }
+
+  .stackColumn {
+    gap: 20px;
+  }
+
+  .tabBar {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .quoteCard,
+  .imageCard,
+  .statCard,
+  .ctaCard {
+    padding: 24px;
+    border-radius: 20px;
+  }
+}

@@ -1,0 +1,239 @@
+.section {
+  position: relative;
+  background-color: #f7f7f5; /* Extends the clean bone-white canvas */
+  color: var(--color-navy);
+  padding: clamp(80px, 12vh, 140px) 0;
+  z-index: 5;
+  border-top: 1px solid rgba(15, 30, 46, 0.05); /* Soft visual section boundary */
+}
+
+/* Section Header */
+.header {
+  max-width: 720px;
+  margin-bottom: clamp(40px, 6vh, 60px);
+}
+
+.label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  font-weight: 500;
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
+}
+
+/* 2-Column Grid */
+.grid {
+  display: grid;
+  /* Give more visual weight to the right media panel */
+  grid-template-columns: 1fr 1.35fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+/* Left Column: Interactive Accordion Cards */
+.tabsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tab {
+  background: rgba(15, 30, 46, 0.02);
+  border: 1px solid rgba(15, 30, 46, 0.04);
+  border-radius: 20px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: background, border-color, box-shadow;
+}
+
+.tab:hover {
+  background: rgba(15, 30, 46, 0.04);
+}
+
+.activeTab {
+  background: #ffffff !important;
+  border-color: rgba(0, 168, 150, 0.15);
+  box-shadow: 0 10px 30px rgba(15, 30, 46, 0.04);
+}
+
+.tabHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tabNumber {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(15, 30, 46, 0.4);
+}
+
+.tabTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  font-weight: 500;
+  color: var(--color-navy);
+  flex-grow: 1;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 30, 46, 0.03);
+  color: var(--color-navy);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.activeTab .iconWrapper {
+  background: rgba(0, 168, 150, 0.08);
+  color: var(--color-accent-teal);
+}
+
+.chevron {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.chevronRotated {
+  transform: rotate(180deg);
+}
+
+/* Accordion Expansion */
+.tabBody {
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tabBodyInner {
+  padding-top: 16px;
+  padding-left: 34px;
+}
+
+.tabDescription {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(15, 30, 46, 0.7);
+}
+
+/* Right Column: Media Panel */
+.visualCol {
+  position: relative;
+  width: 100%;
+}
+
+.mediaFrame {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  /* Taller frame so the image/video shows more content */
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 24px 60px rgba(15, 30, 46, 0.12);
+  background: #e8e8e5;
+}
+
+/* Progress ring wrapper */
+.progressRing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mediaWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity;
+}
+
+.mediaElement {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Floating Glassmorphic Badge */
+.glassBadge {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  z-index: 5;
+  box-shadow: 0 4px 20px rgba(15, 30, 46, 0.05);
+  pointer-events: none;
+}
+
+.badgeLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  font-weight: 500;
+}
+
+.badgeText {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-navy);
+}
+
+/* Responsive configurations */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .visualCol {
+    order: -1; /* Display media panel above text triggers on mobile viewports */
+  }
+
+  .mediaFrame {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 768px) {
+  .mediaFrame {
+    border-radius: 24px;
+  }
+
+  .tab {
+    padding: 20px;
+  }
+
+  .tabBodyInner {
+    padding-left: 0; /* Save inline spacing on phone screens */
+  }
+}
