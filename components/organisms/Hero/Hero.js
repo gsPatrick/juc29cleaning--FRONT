@@ -1,34 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Mission from "../Mission/Mission";
 import EstimateForm from "../EstimateForm/EstimateForm";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setExpanded(window.scrollY > 50);
-
-    // Only expand on load if the user has scrolled significantly down (e.g. scroll restoration)
-    if (window.scrollY > 50) {
-      setExpanded(true);
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
+  // Video opens with the intro reveal animation and stays fullscreen — no scroll expand/contract.
   return (
     <section className={styles.experience} id="home">
       {/* Sticky video backdrop */}
       <div className={styles.videoBg}>
-        <div className={`${styles.frame} ${expanded ? styles.expanded : ""}`}>
+        <div className={`${styles.frame} ${styles.expanded}`}>
           <div className={styles.canvas}>
             <video autoPlay loop muted playsInline className={styles.video}>
               <source src="/videos/hero.mp4" type="video/mp4" />
@@ -47,7 +29,7 @@ export default function Hero() {
         <div className={styles.heroGrid}>
 
           {/* Right column — glass form card pinned to far right edge */}
-          <div className={`${styles.heroContent} ${expanded ? styles.heroContentExpanded : ""}`}>
+          <div className={`${styles.heroContent} ${styles.heroContentExpanded}`}>
             <div className={styles.formCard}>
               <div className={styles.cardHeader}>
                 <span className={styles.cardBadge}>✦ Free Quote</span>

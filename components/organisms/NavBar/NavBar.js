@@ -52,8 +52,8 @@ export default function NavBar() {
         <nav className={styles.navbar}>
           {/* Logo */}
           <Link href="/" className={styles.logo} onClick={closeMenu}>
-            <span className={styles.logoText}>JUC29</span>
             <img src="/images/logo.png" alt="JUC29 Cleaning" className={styles.logoImg} />
+            <span className={styles.logoTagline}>Cleaning &amp; Carpet Care</span>
           </Link>
 
           {/* Desktop Navigation Links */}

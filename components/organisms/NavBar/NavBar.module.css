@@ -74,15 +74,39 @@
 /* Logo Styling */
 .logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 2px;
   text-decoration: none;
   cursor: pointer;
   z-index: 1000;
 }
 
+/* Tagline under the logo */
+.logoTagline {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  white-space: nowrap;
+  transition: color var(--transition-smooth), font-size var(--transition-smooth);
+}
+
+/* Shrink tagline together with the logo when scrolled into the pill */
+.scrolled .logoTagline {
+  font-size: 9px;
+}
+
+/* Over the video hero, keep the tagline readable */
+.header:not(.scrolled) .logoTagline {
+  color: #003760;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);
+}
+
 .logoImg {
-  height: clamp(58px, 7vh, 70px);
+  height: clamp(46px, 5.6vh, 54px);
   width: auto;
   object-fit: contain;
   display: block; /* Logo image always visible — including transparent mode */
@@ -95,7 +119,7 @@
 
 /* Shrink to fit the floating white pill when scrolled */
 .scrolled .logoImg {
-  height: 46px;
+  height: 38px;
 }
 
 .logoText {
