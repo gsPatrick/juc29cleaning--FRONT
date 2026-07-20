@@ -82,7 +82,7 @@
 }
 
 .logoImg {
-  height: clamp(80px, 10vh, 104px);
+  height: clamp(58px, 7vh, 70px);
   width: auto;
   object-fit: contain;
   display: block; /* Logo image always visible — including transparent mode */
@@ -90,7 +90,12 @@
   padding: 0;
   border-radius: 0;
   box-shadow: none;
-  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+  transition: height var(--transition-smooth), transform var(--transition-smooth);
+}
+
+/* Shrink to fit the floating white pill when scrolled */
+.scrolled .logoImg {
+  height: 46px;
 }
 
 .logoText {
