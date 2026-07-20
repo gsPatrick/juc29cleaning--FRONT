@@ -46,11 +46,11 @@ export default function Hero() {
 
         <div className={styles.heroGrid}>
 
-          {/* Left column — glass form card pinned to far left edge */}
+          {/* Right column — glass form card pinned to far right edge */}
           <div className={`${styles.heroContent} ${expanded ? styles.heroContentExpanded : ""}`}>
             <div className={styles.formCard}>
               <div className={styles.cardHeader}>
-                <span className={styles.cardBadge}>✦ Free Estimate</span>
+                <span className={styles.cardBadge}>✦ Free Quote</span>
                 <h2 className={styles.cardTitle}>Book Your Clean</h2>
               </div>
 
@@ -65,7 +65,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right column — stays empty, video breathes through */}
+          {/* Left column — stays empty, video breathes through */}
           <div className={styles.heroVisualSpacer} />
         </div>
 

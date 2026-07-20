@@ -86,8 +86,8 @@
 
 .heroGrid {
   display: grid;
-  /* Card column: fixed narrow width pinned to left edge */
-  grid-template-columns: 320px 1fr;
+  /* Card column: fixed narrow width pinned to right edge */
+  grid-template-columns: 1fr 320px;
   gap: 0;
   align-items: stretch;
   min-height: 130vh;
@@ -96,25 +96,27 @@
   width: 100%;
 }
 
-/* ─── Left column: form card ─────────────────────────────────────────── */
+/* ─── Right column: form card ────────────────────────────────────────── */
 .heroContent {
+  order: 2; /* place the card in the right (320px) column */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   /* Extra breathing room so card clears the rounded frame border when retracted */
-  padding-left: 72px;
+  padding-right: 72px;
   padding-top: 24px;
-  transition: padding-left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: padding-right 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
 
 /* When expanded, reduce padding so card sits closer to the edge */
 .heroContentExpanded {
-  padding-left: 36px;
+  padding-right: 36px;
 }
 
-/* ─── Right column: empty — video shows through ──────────────────────── */
+/* ─── Left column: empty — video shows through ───────────────────────── */
 .heroVisualSpacer {
+  order: 1;
   width: 100%;
 }
 
@@ -124,10 +126,10 @@
   position: sticky;
   /* Dynamically centers the card inside any viewport height (card height is ~620px, so 310px half) */
   top: max(110px, calc(62vh - 310px));
-  /* Zero fill — only the blur and thin border give shape */
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(28px) saturate(1.4);
-  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  /* Neutral gray frosted glass — strong blur, no dark tint */
+  background: rgba(140, 148, 156, 0.28);
+  backdrop-filter: blur(44px) saturate(1.1);
+  -webkit-backdrop-filter: blur(44px) saturate(1.1);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 18px;
   padding: 22px 20px 16px;
@@ -366,9 +368,9 @@
     width: 100%;
     position: sticky;
     top: max(96px, calc(50vh - 310px));
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(28px) saturate(1.4);
-    -webkit-backdrop-filter: blur(28px) saturate(1.4);
+    background: rgba(140, 148, 156, 0.28);
+    backdrop-filter: blur(44px) saturate(1.1);
+    -webkit-backdrop-filter: blur(44px) saturate(1.1);
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 18px;
     box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.06) inset,

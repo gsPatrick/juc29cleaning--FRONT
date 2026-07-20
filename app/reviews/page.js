@@ -2,96 +2,168 @@
 
 import styles from "./page.module.css";
 
+// Real 5-star customer reviews for JUC29 Cleaning. Service tags are derived from
+// each review's own text; no locations or dates are invented.
 const REVIEWS = [
   {
-    name: "Amanda Torres",
-    location: "South Tampa",
+    name: "Betsy Irizarry",
     rating: 5,
-    date: "2 weeks ago",
-    text: "JUC29 is the most professional cleaning service I've used in Tampa. They treated my home like a five-star hotel. The grout in my master bath looks brand new — and I had given up hope on it.",
-    service: "Residential Detailing",
-    initials: "AT",
+    text: "We hired Juc29 cleaning to do a deep cleaning in our airbnb. The shower needed major work and they did an amazing job. They are reliable and punctual. Will highly recommend.",
+    service: "Airbnb Deep Clean",
+    initials: "BI",
     color: "#00a896",
   },
   {
-    name: "Marcus Webb",
-    location: "Hyde Park",
+    name: "Robin May",
     rating: 5,
-    date: "1 month ago",
-    text: "I've been through four different cleaning companies. None of them touched the baseboards, fan blades, or light switches like JUC29 does. The checklist they leave behind is incredibly detailed.",
-    service: "Bi-Weekly Residential",
-    initials: "MW",
+    text: "So pleased with the deep clean they did on my home! I have very exacting standards and they exceeded them. It was just the help we needed with two dirty dogs and a newborn home.",
+    service: "Deep Clean",
+    initials: "RM",
     color: "#9ECF84",
   },
   {
-    name: "Sofia Kline",
-    location: "Davis Islands",
+    name: "Damaris Carlson",
     rating: 5,
-    date: "3 weeks ago",
-    text: "We use JUC29 for our boutique design studio downtown. The team is incredibly respectful of the space and our client-facing areas always look immaculate. I can't recommend them enough.",
-    service: "Commercial Studio Program",
-    initials: "SK",
+    text: "They were prompt in responding to my messages and were available the day I needed them. They did a deep clean in my home after I moved and did an exceptional job.",
+    service: "Move-In Deep Clean",
+    initials: "DC",
     color: "#b58900",
   },
   {
-    name: "Robert Jimenez",
-    location: "Westshore",
+    name: "Jessica Schools",
     rating: 5,
-    date: "6 weeks ago",
-    text: "Post-construction clean was flawless. The attention to detail during our kitchen renovation cleanup was next-level. Every single cabinet interior was spotless and they even polished the hardware.",
-    service: "Post-Build Restoration",
-    initials: "RJ",
+    text: "Carolina had great communication from the start. She set all the right expectations and Anna did an amazing job!",
+    service: "Verified Customer",
+    initials: "JS",
     color: "#00a896",
   },
   {
-    name: "Natalie Chen",
-    location: "St. Petersburg",
+    name: "Helen Williams Moulis",
     rating: 5,
-    date: "2 months ago",
-    text: "JUC29 has become an essential part of our home maintenance routine. It's not just cleaning — it's a real service. Everything smells incredible and looks pristine for weeks.",
-    service: "Monthly Residential",
-    initials: "NC",
+    text: "Great service! Was able to come on short notice and did a very thorough move out clean with pictures afterwards.",
+    service: "Move-Out Clean",
+    initials: "HM",
     color: "#9ECF84",
   },
   {
-    name: "David Park",
-    location: "Clearwater",
+    name: "Sarah Thesse Wobrock",
     rating: 5,
-    date: "5 weeks ago",
-    text: "The shower glass descaling they did was remarkable. I thought the glass was permanently damaged from hard water — JUC29 made it crystal clear again. Worth every dollar.",
-    service: "Bathroom Deep Restore",
-    initials: "DP",
+    text: "Carollina and her team were available on short notice to deep clean our condo. It is extremely evident that she takes pride in each and every job.",
+    service: "Condo Deep Clean",
+    initials: "SW",
     color: "#b58900",
   },
   {
-    name: "Elena Gutierrez",
-    location: "Palma Ceia",
+    name: "Camerin Quinones",
     rating: 5,
-    date: "3 months ago",
-    text: "I was hesitant at first because of the price point but after the first session I understood completely. The quality is simply on another level. My entire home felt transformed.",
-    service: "Residential Estate",
-    initials: "EG",
+    text: "Carollina was amazing! Family of 6 household with 3 dogs — she had my house back in order and looking brand new.",
+    service: "Home Cleaning",
+    initials: "CQ",
     color: "#00a896",
   },
   {
-    name: "James O'Brien",
-    location: "Channelside",
+    name: "Nathan Marquardt",
     rating: 5,
-    date: "7 weeks ago",
-    text: "Professional, punctual, and thorough. The 35-point checklist photos they send after each visit give me incredible peace of mind. No other company does that.",
-    service: "Weekly Maintenance",
-    initials: "JO",
+    text: "Carolina and her team did a fantastic job. They were very thorough. My wife was very happy with the results.",
+    service: "Deep Clean",
+    initials: "NM",
     color: "#9ECF84",
   },
   {
-    name: "Christina Lee",
-    location: "New Tampa",
+    name: "Jaime Dumala",
     rating: 5,
-    date: "4 months ago",
-    text: "Our oven restoration alone was worth booking them. I didn't even know an oven could look that clean again after years of use. JUC29 is genuinely impressive.",
-    service: "Kitchen Deep Detail",
-    initials: "CL",
+    text: "Carolina has been cleaning our home for a few months now and her service is outstanding. She is consistent and detailed, and always leaves our home so clean and fresh.",
+    service: "Recurring Client",
+    initials: "JD",
     color: "#b58900",
+  },
+  {
+    name: "Diego Dominguez",
+    rating: 5,
+    text: "Caroline and her company have been cleaning my home for over a year now. We have 3 dogs and 4 people living here and it can get very messy. I am very pleased with the work that they do.",
+    service: "Recurring Client",
+    initials: "DD",
+    color: "#00a896",
+  },
+  {
+    name: "Fabiane Lima",
+    rating: 5,
+    text: "I finally found someone who I can trust to clean my house the way I always wanted. Carollina works with perfection.",
+    service: "Recurring Client",
+    initials: "FL",
+    color: "#9ECF84",
+  },
+  {
+    name: "Samantha Possert",
+    rating: 5,
+    text: "Just used this service for the first time and was very pleased. Friendly and efficient company with good communication.",
+    service: "First-Time Client",
+    initials: "SP",
+    color: "#b58900",
+  },
+  {
+    name: "Krista Hutchinson",
+    rating: 5,
+    text: "Carollina and her team did such an amazing job on my house! I'm so thankful that I found her!",
+    service: "Home Cleaning",
+    initials: "KH",
+    color: "#00a896",
+  },
+  {
+    name: "Haley Mitchell",
+    rating: 5,
+    text: "I was extremely happy with the cleaning that was done for my apartment! Very detailed and fair priced.",
+    service: "Apartment Cleaning",
+    initials: "HA",
+    color: "#9ECF84",
+  },
+  {
+    name: "Stacey Nicole",
+    rating: 5,
+    text: "Very professional and easy to work with. They're very thorough and do a great job. I would definitely recommend them!",
+    service: "Verified Customer",
+    initials: "SN",
+    color: "#b58900",
+  },
+  {
+    name: "Callie Hodges",
+    rating: 5,
+    text: "Carolina did a FANTASTIC job cleaning my house!! She is not only friendly, but diligent, and quick.",
+    service: "Home Cleaning",
+    initials: "CH",
+    color: "#00a896",
+  },
+  {
+    name: "Victor Olise",
+    rating: 5,
+    text: "Carolina did such a fantastic job cleaning my house that I would recommend her to anyone.",
+    service: "Home Cleaning",
+    initials: "VO",
+    color: "#9ECF84",
+  },
+  {
+    name: "Stacy Lyn Taylor",
+    rating: 5,
+    text: "Very happy with the quality and attention to detail. I would highly recommend.",
+    service: "Verified Customer",
+    initials: "ST",
+    color: "#b58900",
+  },
+  {
+    name: "William Bainer",
+    rating: 5,
+    text: "Always lovely service. Thanks so much. 10/10.",
+    service: "Verified Customer",
+    initials: "WB",
+    color: "#00a896",
+  },
+  {
+    name: "Jennifer Cortes",
+    rating: 5,
+    text: "I am very happy. Thank you!",
+    service: "Verified Customer",
+    initials: "JC",
+    color: "#9ECF84",
   },
 ];
 
@@ -125,7 +197,7 @@ export default function ReviewsPage() {
             </h1>
             <div className={styles.heroRating}>
               <StarRating rating={5} />
-              <span className={styles.heroRatingText}>5.0 average across 150+ verified Google reviews</span>
+              <span className={styles.heroRatingText}>5.0 average across 20+ verified Google reviews</span>
             </div>
           </div>
         </div>
@@ -163,7 +235,7 @@ export default function ReviewsPage() {
                   </div>
                   <div className={styles.reviewer}>
                     <span className={styles.reviewerName}>{review.name}</span>
-                    <span className={styles.reviewerLocation}>{review.location}, FL</span>
+                    <span className={styles.reviewerLocation}>Verified Google Review</span>
                   </div>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.googleLogo}>
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -176,7 +248,6 @@ export default function ReviewsPage() {
                 <p className={styles.reviewText}>"{review.text}"</p>
                 <div className={styles.cardBottom}>
                   <span className={styles.serviceTag}>{review.service}</span>
-                  <span className={styles.reviewDate}>{review.date}</span>
                 </div>
               </div>
             ))}
@@ -189,7 +260,7 @@ export default function ReviewsPage() {
         <div className="container">
           <div className={styles.ctaInner}>
             <h2 className={styles.ctaTitle}>Become our next 5-star review.</h2>
-            <p className={styles.ctaDesc}>Join 350+ Tampa Bay clients who trust JUC29 to maintain their spaces.</p>
+            <p className={styles.ctaDesc}>Join the Tampa Bay clients who trust JUC29 to maintain their spaces.</p>
             <button
               className={styles.ctaBtn}
               onClick={() => window.dispatchEvent(new CustomEvent("open-booking"))}

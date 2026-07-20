@@ -39,7 +39,7 @@ export default function HomeEstimate() {
 
             <div className={styles.actionsRow}>
               <button onClick={handleBookNowClick} className={styles.bookBtn}>
-                Get Free Estimate
+                Get My Free Quote
               </button>
               <div className={styles.ratingsBadges}>
                 <div className={styles.avatars}>
@@ -57,10 +57,10 @@ export default function HomeEstimate() {
           {/* Middle: empty — image breathes through */}
           <div aria-hidden="true" />
 
-          {/* Right Column: Request Free Estimate Form */}
+          {/* Right Column: Request Free Quote Form */}
           <div className={styles.formCol}>
             <div className={styles.formCard}>
-              <h3 className={styles.formTitle}>Request Free Estimate</h3>
+              <h3 className={styles.formTitle}>Request Free Quote</h3>
               <EstimateForm idPrefix="home-estimate" />
             </div>
           </div>

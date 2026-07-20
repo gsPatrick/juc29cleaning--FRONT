@@ -3,6 +3,7 @@ import "./globals.css";
 import NavBar from "@/components/organisms/NavBar/NavBar";
 import Footer from "@/components/organisms/Footer/Footer";
 import BookingModal from "@/components/organisms/BookingModal/BookingModal";
+import PromoPopup from "@/components/organisms/PromoPopup/PromoPopup";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -18,7 +19,7 @@ const outfit = Outfit({
 
 export const metadata = {
   title: "JUC29 Cleaning | Premium Residential & Commercial Cleaning Tampa",
-  description: "Professional, reliable, and premium house and office cleaning services in the Tampa Bay area. Experience a spotless space today. Get your free estimate!",
+  description: "Professional, reliable, and premium house and office cleaning services in the Tampa Bay area. Experience a spotless space today. Get your free quote!",
   keywords: ["cleaning services Tampa", "house cleaning Tampa", "office cleaning Tampa", "deep cleaning", "JUC29 Cleaning"],
 };
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         {children}
         <Footer />
         <BookingModal />
+        <PromoPopup />
       </body>
     </html>
   );

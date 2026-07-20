@@ -82,12 +82,12 @@
 }
 
 .logoImg {
-  height: clamp(38px, 5vh, 46px);
+  height: clamp(48px, 6.2vh, 58px);
   width: auto;
   object-fit: contain;
-  display: none; /* Hide image by default in transparent mode */
+  display: block; /* Logo image always visible — including transparent mode */
   background: #ffffff;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 100px;
   box-shadow: 0 4px 12px rgba(15, 30, 46, 0.08);
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
@@ -99,7 +99,7 @@
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.02em;
-  display: block; /* Show text by default in transparent mode */
+  display: none; /* Wordmark hidden — the image logo is the brand mark */
   transition: color var(--transition-smooth);
 }
 

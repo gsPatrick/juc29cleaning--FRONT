@@ -68,7 +68,7 @@ export default function NavBar() {
           {/* CTA Action */}
           <div className={styles.navActions}>
             <button onClick={handleBookNow} className={styles.ctaButton}>
-              Get Free Estimate
+              Get My Free Quote
 </button>
           </div>
 
@@ -94,7 +94,7 @@ export default function NavBar() {
           <Link href="/reviews" className={styles.mobileNavLink} onClick={closeMenu}>Reviews</Link>
           <Link href="/contact" className={styles.mobileNavLink} onClick={closeMenu}>Contact</Link>
           <button onClick={handleBookNow} className={`${styles.ctaButton} ${styles.mobileCta}`}>
-            Get Free Estimate
+            Get My Free Quote
           </button>
         </div>
       </div>

@@ -3,48 +3,128 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Reviews.module.css";
 
+// Real 5-star customer reviews for JUC29 Cleaning. Roles are derived from the
+// service mentioned in each review — no locations or dates are invented.
 const INITIAL_REVIEWS = [
   {
-    name: "Sarah Jenkins",
-    role: "Homeowner, South Tampa",
-    text: "Absolutely flawless execution. The JUC29 crew detailed our residence with botanical products that left a lovely, natural eucalyptus scent. Best service in Tampa.",
-    stars: 5,
-    date: "2 weeks ago"
+    name: "Betsy Irizarry",
+    role: "Airbnb Deep Clean",
+    text: "We hired Juc29 cleaning to do a deep cleaning in our airbnb. The shower needed major work and they did an amazing job. They are reliable and punctual. Will highly recommend.",
+    stars: 5
   },
   {
-    name: "Marcus Alvarez",
-    role: "Business Owner, St. Petersburg",
-    text: "Highly recommend their commercial program. Our office lobby looks like a luxury hotel every morning. Extremely reliable and detailed after-hours service.",
-    stars: 5,
-    date: "1 month ago"
+    name: "Robin May",
+    role: "Deep Clean",
+    text: "So pleased with the deep clean they did on my home! I have very exacting standards and they exceeded them. It was just the help we needed with two dirty dogs and a newborn home.",
+    stars: 5
   },
   {
-    name: "Clara Sterling",
-    role: "Homeowner, Clearwater Beach",
-    text: "They resolved a post-construction drywall dust disaster in our new home in a single afternoon. The marble surfaces feel like satin. Truly restorative care.",
-    stars: 5,
-    date: "3 days ago"
+    name: "Damaris Carlson",
+    role: "Move-In Deep Clean",
+    text: "They were prompt in responding to my messages and were available the day I needed them. They did a deep clean in my home after I moved and did an exceptional job.",
+    stars: 5
   },
   {
-    name: "David Ross",
-    role: "General Manager, Tampa Bay",
-    text: "Our boutique hotel lobby has never looked cleaner. JUC29's team is quiet, extremely thorough, and respects our high-end wood and metal surfaces.",
-    stars: 5,
-    date: "1 month ago"
+    name: "Jessica Schools",
+    role: "Verified Customer",
+    text: "Carolina had great communication from the start. She set all the right expectations and Anna did an amazing job!",
+    stars: 5
   },
   {
-    name: "Elena Rostova",
-    role: "Interior Designer, South Tampa",
-    text: "The post-construction cleanup was worth every penny. Drywall dust is notoriously hard to get rid of, but they sanitized it perfectly. My clients were wowed.",
-    stars: 5,
-    date: "2 weeks ago"
+    name: "Helen Williams Moulis",
+    role: "Move-Out Clean",
+    text: "Great service! Was able to come on short notice and did a very thorough move out clean with pictures afterwards.",
+    stars: 5
   },
   {
-    name: "Jonathan Vance",
-    role: "Homeowner, Clearwater",
-    text: "Clean home, clean mind. The botanical scent is refreshing and doesn't trigger my allergies like typical harsh chemical cleaners. Highly recommended.",
-    stars: 5,
-    date: "5 days ago"
+    name: "Sarah Thesse Wobrock",
+    role: "Condo Deep Clean",
+    text: "Carollina and her team were available on short notice to deep clean our condo. It is extremely evident that she takes pride in each and every job.",
+    stars: 5
+  },
+  {
+    name: "Camerin Quinones",
+    role: "Home Cleaning",
+    text: "Carollina was amazing! Family of 6 household with 3 dogs — she had my house back in order and looking brand new.",
+    stars: 5
+  },
+  {
+    name: "Nathan Marquardt",
+    role: "Deep Clean",
+    text: "Carolina and her team did a fantastic job. They were very thorough. My wife was very happy with the results.",
+    stars: 5
+  },
+  {
+    name: "Jaime Dumala",
+    role: "Recurring Client",
+    text: "Carolina has been cleaning our home for a few months now and her service is outstanding. She is consistent and detailed, and always leaves our home so clean and fresh.",
+    stars: 5
+  },
+  {
+    name: "Diego Dominguez",
+    role: "Recurring Client",
+    text: "Caroline and her company have been cleaning my home for over a year now. We have 3 dogs and 4 people living here and it can get very messy. I am very pleased with the work that they do.",
+    stars: 5
+  },
+  {
+    name: "Fabiane Lima",
+    role: "Recurring Client",
+    text: "I finally found someone who I can trust to clean my house the way I always wanted. Carollina works with perfection.",
+    stars: 5
+  },
+  {
+    name: "Samantha Possert",
+    role: "First-Time Client",
+    text: "Just used this service for the first time and was very pleased. Friendly and efficient company with good communication.",
+    stars: 5
+  },
+  {
+    name: "Krista Hutchinson",
+    role: "Home Cleaning",
+    text: "Carollina and her team did such an amazing job on my house! I'm so thankful that I found her!",
+    stars: 5
+  },
+  {
+    name: "Haley Mitchell",
+    role: "Apartment Cleaning",
+    text: "I was extremely happy with the cleaning that was done for my apartment! Very detailed and fair priced.",
+    stars: 5
+  },
+  {
+    name: "Stacey Nicole",
+    role: "Verified Customer",
+    text: "Very professional and easy to work with. They're very thorough and do a great job. I would definitely recommend them!",
+    stars: 5
+  },
+  {
+    name: "Callie Hodges",
+    role: "Home Cleaning",
+    text: "Carolina did a FANTASTIC job cleaning my house!! She is not only friendly, but diligent, and quick.",
+    stars: 5
+  },
+  {
+    name: "Victor Olise",
+    role: "Home Cleaning",
+    text: "Carolina did such a fantastic job cleaning my house that I would recommend her to anyone.",
+    stars: 5
+  },
+  {
+    name: "Stacy Lyn Taylor",
+    role: "Verified Customer",
+    text: "Very happy with the quality and attention to detail. I would highly recommend.",
+    stars: 5
+  },
+  {
+    name: "William Bainer",
+    role: "Verified Customer",
+    text: "Always lovely service. Thanks so much. 10/10.",
+    stars: 5
+  },
+  {
+    name: "Jennifer Cortes",
+    role: "Verified Customer",
+    text: "I am very happy. Thank you!",
+    stars: 5
   }
 ];
 
@@ -206,9 +286,7 @@ export default function Reviews() {
                 <div className={styles.cardFooter}>
                   <div className={styles.clientInfo}>
                     <span className={styles.clientName}>{review.name}</span>
-                    <span className={styles.clientRole}>
-                      {review.role} • <span className={styles.dateText}>{review.date}</span>
-                    </span>
+                    <span className={styles.clientRole}>{review.role}</span>
                   </div>
                   <div className={styles.googleIconWrapper}>
                     <GoogleIcon />

@@ -148,7 +148,7 @@ export default function EstimateForm({
         >
           <polyline points="20 6 9 17 4 12" />
         </svg>
-        <h4 className={styles.successHeading}>Estimate Request Received</h4>
+        <h4 className={styles.successHeading}>Quote Request Received</h4>
         <p className={styles.successText}>
           Thank you for choosing JUC29. Our coordinator will contact you in less than 2 hours to confirm detailing variables.
         </p>
@@ -452,7 +452,7 @@ export default function EstimateForm({
           </button>
         )}
         <button type="submit" className={styles.submitBtn}>
-          {step < TOTAL_STEPS ? "Next" : "Get Free Estimate"}
+          {step < TOTAL_STEPS ? "Next" : "Get My Free Quote"}
         </button>
       </div>
 

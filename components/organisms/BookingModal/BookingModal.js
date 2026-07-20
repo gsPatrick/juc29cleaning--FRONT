@@ -36,7 +36,7 @@ export default function BookingModal() {
         <div className={styles.header}>
           <div>
             <span className={styles.label}>✦ Secure Request</span>
-            <h3 className={styles.title}>Request Free Estimate</h3>
+            <h3 className={styles.title}>Request Free Quote</h3>
           </div>
           <button className={styles.closeBtn} onClick={handleClose} aria-label="Close booking">
             <svg
