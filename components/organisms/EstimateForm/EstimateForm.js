@@ -3,18 +3,33 @@
 import { useState, useSyncExternalStore } from "react";
 import styles from "./EstimateForm.module.css";
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 9;
 
 const STEP_TITLES = [
   "Tell us about you",
-  "Property Information",
-  "Home Details",
+  "Property Address",
+  "Property Type",
+  "How many bedrooms?",
+  "How many bathrooms?",
+  "Approximate square footage",
   "Select Your Service",
   "Help Us Estimate Your Home",
   "Additional Information",
 ];
 
 const PROPERTY_TYPES = ["House", "Condo", "Apartment", "Townhome"];
+
+const BEDROOM_OPTIONS = ["1", "2", "3", "4", "5", "6+"];
+
+const BATHROOM_OPTIONS = ["1", "1.5", "2", "2.5", "3", "3.5", "4+"];
+
+const SQFT_OPTIONS = [
+  "Under 1,000",
+  "1,000–2,000",
+  "2,000–3,000",
+  "3,000–4,000",
+  "4,000+",
+];
 
 const SERVICES = [
   "Deep Cleaning",
@@ -119,6 +134,19 @@ export default function EstimateForm({
   const handleReset = () => {
     setSubmitted(false);
     updateStore({ data: INITIAL_DATA, step: 1 });
+  };
+
+  // Button-select steps have no native validation, so gate "Next" on a choice.
+  const canProceed = () => {
+    switch (step) {
+      case 3: return !!formData.propertyType;
+      case 4: return !!formData.bedrooms;
+      case 5: return !!formData.bathrooms;
+      case 6: return !!formData.sqft;
+      case 7: return formData.services.length > 0;
+      case 8: return !!formData.estimateMethod;
+      default: return true; // typed steps use native "required"; notes are optional
+    }
   };
 
   // "Next" is a submit button so the browser validates only the fields
@@ -268,79 +296,84 @@ export default function EstimateForm({
         </>
       )}
 
-      {/* ─── Step 3 — Home Details ─── */}
+      {/* ─── Step 3 — Property Type ─── */}
       {step === 3 && (
-        <>
-          <div className={styles.inputGroup}>
-            <span className={styles.fieldLabel}>Property Type</span>
-            <div className={styles.typeGrid}>
-              {PROPERTY_TYPES.map((type) => (
-                <button
-                  key={type}
-                  type="button"
-                  className={`${styles.typePill} ${formData.propertyType === type ? styles.typePillActive : ""}`}
-                  onClick={() => setFormData({ ...formData, propertyType: type })}
-                >
-                  {type}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.row}>
-            <div className={styles.inputGroup}>
-              <label htmlFor={`${idPrefix}-bedrooms`} className={styles.fieldLabel}>Bedrooms</label>
-              <select
-                id={`${idPrefix}-bedrooms`}
-                value={formData.bedrooms}
-                onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-                className={styles.select}
+        <div className={styles.inputGroup}>
+          <span className={styles.fieldLabel}>What type of property is it?</span>
+          <div className={styles.typeGrid}>
+            {PROPERTY_TYPES.map((type) => (
+              <button
+                key={type}
+                type="button"
+                className={`${styles.typePill} ${formData.propertyType === type ? styles.typePillActive : ""}`}
+                onClick={() => setFormData({ ...formData, propertyType: type })}
               >
-                <option value="">How many bedrooms?</option>
-                <option value="1">1 Bedroom</option>
-                <option value="2">2 Bedrooms</option>
-                <option value="3">3 Bedrooms</option>
-                <option value="4">4 Bedrooms</option>
-                <option value="5">5 Bedrooms</option>
-                <option value="6+">6+ Bedrooms</option>
-              </select>
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor={`${idPrefix}-bathrooms`} className={styles.fieldLabel}>Bathrooms</label>
-              <select
-                id={`${idPrefix}-bathrooms`}
-                value={formData.bathrooms}
-                onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-                className={styles.select}
-              >
-                <option value="">How many bathrooms?</option>
-                <option value="1">1 Bathroom</option>
-                <option value="1.5">1.5 Bathrooms</option>
-                <option value="2">2 Bathrooms</option>
-                <option value="2.5">2.5 Bathrooms</option>
-                <option value="3">3 Bathrooms</option>
-                <option value="3.5">3.5 Bathrooms</option>
-                <option value="4+">4+ Bathrooms</option>
-              </select>
-            </div>
+                {type}
+              </button>
+            ))}
           </div>
-
-          <div className={styles.inputGroup}>
-            <label htmlFor={`${idPrefix}-sqft`} className={styles.fieldLabel}>Approximate Square Footage</label>
-            <input
-              type="text"
-              id={`${idPrefix}-sqft`}
-              placeholder="e.g. 2500"
-              value={formData.sqft}
-              onChange={(e) => setFormData({ ...formData, sqft: e.target.value })}
-              className={styles.input}
-            />
-          </div>
-        </>
+        </div>
       )}
 
-      {/* ─── Step 4 — Select Your Service ─── */}
+      {/* ─── Step 4 — Bedrooms ─── */}
       {step === 4 && (
+        <div className={styles.inputGroup}>
+          <span className={styles.fieldLabel}>Number of bedrooms</span>
+          <div className={styles.chipRow}>
+            {BEDROOM_OPTIONS.map((n) => (
+              <button
+                key={n}
+                type="button"
+                className={`${styles.chip} ${formData.bedrooms === n ? styles.chipActive : ""}`}
+                onClick={() => setFormData({ ...formData, bedrooms: n })}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ─── Step 5 — Bathrooms ─── */}
+      {step === 5 && (
+        <div className={styles.inputGroup}>
+          <span className={styles.fieldLabel}>Number of bathrooms</span>
+          <div className={styles.chipRow}>
+            {BATHROOM_OPTIONS.map((n) => (
+              <button
+                key={n}
+                type="button"
+                className={`${styles.chip} ${formData.bathrooms === n ? styles.chipActive : ""}`}
+                onClick={() => setFormData({ ...formData, bathrooms: n })}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ─── Step 6 — Square Footage ─── */}
+      {step === 6 && (
+        <div className={styles.inputGroup}>
+          <span className={styles.fieldLabel}>Approximate square footage</span>
+          <div className={styles.chipRow}>
+            {SQFT_OPTIONS.map((range) => (
+              <button
+                key={range}
+                type="button"
+                className={`${styles.chip} ${formData.sqft === range ? styles.chipActive : ""}`}
+                onClick={() => setFormData({ ...formData, sqft: range })}
+              >
+                {range}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ─── Step 7 — Select Your Service ─── */}
+      {step === 7 && (
         <div className={styles.serviceList}>
           {SERVICES.map((service) => (
             <label
@@ -364,8 +397,8 @@ export default function EstimateForm({
         </div>
       )}
 
-      {/* ─── Step 5 — Help Us Estimate Your Home ─── */}
-      {step === 5 && (
+      {/* ─── Step 8 — Help Us Estimate Your Home ─── */}
+      {step === 8 && (
         <>
           <p className={styles.stepHint}>Choose one option:</p>
           <div className={styles.optionList}>
@@ -424,8 +457,8 @@ export default function EstimateForm({
         </>
       )}
 
-      {/* ─── Step 6 — Additional Information ─── */}
-      {step === 6 && (
+      {/* ─── Step 9 — Additional Information ─── */}
+      {step === 9 && (
         <div className={styles.inputGroup}>
           <label htmlFor={`${idPrefix}-additional`} className={styles.fieldLabel}>
             Is there anything else you&apos;d like us to know?
@@ -451,7 +484,7 @@ export default function EstimateForm({
             Back
           </button>
         )}
-        <button type="submit" className={styles.submitBtn}>
+        <button type="submit" className={styles.submitBtn} disabled={!canProceed()}>
           {step < TOTAL_STEPS ? "Next" : "Get My Free Quote"}
         </button>
       </div>
