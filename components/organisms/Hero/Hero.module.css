@@ -114,10 +114,40 @@
   padding-right: 36px;
 }
 
-/* ─── Left column: empty — video shows through ───────────────────────── */
+/* ─── Left column: headline over the video ───────────────────────────── */
 .heroVisualSpacer {
   order: 1;
   width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.heroCopy {
+  max-width: 620px;
+  padding: clamp(24px, 6vh, 96px) 24px 0 clamp(24px, 4vw, 72px);
+  animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.heroHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 68px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+  margin: 0 0 20px;
+}
+
+.heroSubheadline {
+  font-family: var(--font-body, 'Outfit', sans-serif);
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.55;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+  max-width: 520px;
+  margin: 0;
 }
 
 /* ─── Glass card — 100% transparent, pure backdrop blur ──────────────── */
@@ -361,7 +391,24 @@
   }
 
   .heroVisualSpacer {
-    display: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .heroCopy {
+    max-width: 500px;
+    padding: 8px 20px 24px;
+    text-align: center;
+  }
+
+  .heroHeadline {
+    font-size: clamp(30px, 8vw, 44px);
+    margin-bottom: 14px;
+  }
+
+  .heroSubheadline {
+    font-size: clamp(14px, 4vw, 16px);
+    margin-inline: auto;
   }
 
   .formCard {
