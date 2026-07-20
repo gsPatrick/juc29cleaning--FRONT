@@ -53,7 +53,7 @@ export default function NavBar() {
           {/* Logo */}
           <Link href="/" className={styles.logo} onClick={closeMenu}>
             <span className={styles.logoText}>JUC29</span>
-            <img src="/images/logo.jpeg" alt="JUC29 Cleaning" className={styles.logoImg} />
+            <img src="/images/logo.png" alt="JUC29 Cleaning" className={styles.logoImg} />
           </Link>
 
           {/* Desktop Navigation Links */}
