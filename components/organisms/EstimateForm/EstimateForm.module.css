@@ -721,3 +721,137 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ─── Vertical option buttons — one per line, lined up (Steps 1–4) ─────── */
+.optionColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.optionBtn {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.optionBtn:hover {
+  border-color: var(--color-accent-teal);
+}
+
+.optionBtnActive {
+  border-color: var(--color-accent-teal);
+  background: rgba(158, 207, 132, 0.12);
+  box-shadow: 0 0 0 3px rgba(158, 207, 132, 0.15);
+  font-weight: 600;
+}
+
+.glass .optionColumn {
+  gap: 7px;
+}
+
+.glass .optionBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  color: #ffffff;
+}
+
+.glass .optionBtn:hover {
+  border-color: #9ecf84;
+}
+
+.glass .optionBtnActive {
+  border-color: #9ecf84;
+  background: rgba(158, 207, 132, 0.15);
+  box-shadow: none;
+}
+
+.optionalTag {
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.6;
+  font-size: 0.85em;
+}
+
+/* ─── Phone field with country selector + validation (Step 9) ─────────── */
+.phoneField {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 3px 10px 3px 12px;
+  background: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.phoneField:focus-within {
+  border-color: var(--color-accent-teal);
+}
+
+.phoneField.phoneFieldError {
+  border-color: #c0392b;
+}
+
+.phoneField :global(.PhoneInputInput) {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 11px 6px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--color-navy);
+  width: 100%;
+}
+
+.phoneField :global(.PhoneInputCountrySelectArrow) {
+  opacity: 0.5;
+}
+
+.phoneError {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #c0392b;
+}
+
+/* Glass variant of the phone field (hero over video) */
+.glass .phoneField {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  border-radius: 9px;
+  padding: 1px 8px 1px 10px;
+  color: #ffffff;
+}
+
+.glass .phoneField:focus-within {
+  border-color: #9ecf84;
+}
+
+.glass .phoneField :global(.PhoneInputInput) {
+  color: #ffffff;
+  font-size: 12.5px;
+  padding: 9px 6px;
+}
+
+.glass .phoneField :global(.PhoneInputInput)::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.glass .phoneError {
+  color: #ffb4a8;
+}

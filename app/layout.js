@@ -1,5 +1,6 @@
 import { Montserrat, Outfit } from "next/font/google";
 import "./globals.css";
+import "react-phone-number-input/style.css";
 import NavBar from "@/components/organisms/NavBar/NavBar";
 import Footer from "@/components/organisms/Footer/Footer";
 import BookingModal from "@/components/organisms/BookingModal/BookingModal";

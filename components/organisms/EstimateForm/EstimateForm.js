@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import styles from "./EstimateForm.module.css";
 
 const TOTAL_STEPS = 9;
 
 const STEP_TITLES = [
-  "Tell us about you",
-  "Property Address",
   "Property Type",
   "How many bedrooms?",
   "How many bathrooms?",
@@ -15,6 +14,8 @@ const STEP_TITLES = [
   "Select Your Service",
   "Help Us Estimate Your Home",
   "Additional Information",
+  "Property Address",
+  "Your Contact Details",
 ];
 
 const PROPERTY_TYPES = ["House", "Condo", "Apartment", "Townhome"];
@@ -95,7 +96,8 @@ const updateStore = (patch) => {
 };
 
 /**
- * Shared 6-step estimate wizard.
+ * Shared 9-step estimate wizard.
+ * Options (buttons only) come first; typed contact details come last.
  * variant: "light" (white cards/modal) | "glass" (transparent over video — hero)
  * idPrefix: keeps input ids unique when the form renders more than once per page
  * onSuccessClose + successCloseLabel: override the success button (e.g. close a modal);
@@ -136,16 +138,22 @@ export default function EstimateForm({
     updateStore({ data: INITIAL_DATA, step: 1 });
   };
 
+  // Phone is validated against the selected country's real numbering rules
+  // (libphonenumber), so gibberish / wrong-length numbers can't get through.
+  const phoneValid = !!formData.phone && isValidPhoneNumber(formData.phone);
+  const showPhoneError = !!formData.phone && !phoneValid;
+
   // Button-select steps have no native validation, so gate "Next" on a choice.
   const canProceed = () => {
     switch (step) {
-      case 3: return !!formData.propertyType;
-      case 4: return !!formData.bedrooms;
-      case 5: return !!formData.bathrooms;
-      case 6: return !!formData.sqft;
-      case 7: return formData.services.length > 0;
-      case 8: return !!formData.estimateMethod;
-      default: return true; // typed steps use native "required"; notes are optional
+      case 1: return !!formData.propertyType;
+      case 2: return !!formData.bedrooms;
+      case 3: return !!formData.bathrooms;
+      case 4: return !!formData.sqft;
+      case 5: return formData.services.length > 0;
+      case 6: return !!formData.estimateMethod;
+      case 9: return phoneValid; // name/email use native "required"; phone must be valid
+      default: return true; // notes are optional; address uses native "required"
     }
   };
 
@@ -206,106 +214,16 @@ export default function EstimateForm({
         <h4 className={styles.stepTitle}>{STEP_TITLES[step - 1]}</h4>
       </div>
 
-      {/* ─── Step 1 — Tell us about you ─── */}
+      {/* ─── Step 1 — Property Type ─── */}
       {step === 1 && (
-        <>
-          <div className={styles.inputGroup}>
-            <label htmlFor={`${idPrefix}-fullname`} className={styles.fieldLabel}>Full Name*</label>
-            <input
-              type="text"
-              id={`${idPrefix}-fullname`}
-              required
-              placeholder="Full Name"
-              value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label htmlFor={`${idPrefix}-phone`} className={styles.fieldLabel}>Mobile Phone*</label>
-            <input
-              type="tel"
-              id={`${idPrefix}-phone`}
-              required
-              placeholder="(813) 555-0100"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label htmlFor={`${idPrefix}-email`} className={styles.fieldLabel}>Email*</label>
-            <input
-              type="email"
-              id={`${idPrefix}-email`}
-              required
-              placeholder="name@example.com"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className={styles.input}
-            />
-          </div>
-        </>
-      )}
-
-      {/* ─── Step 2 — Property Information ─── */}
-      {step === 2 && (
-        <>
-          <div className={styles.inputGroup}>
-            <label htmlFor={`${idPrefix}-address`} className={styles.fieldLabel}>Property Address*</label>
-            <input
-              type="text"
-              id={`${idPrefix}-address`}
-              required
-              placeholder="Start typing your address..."
-              autoComplete="street-address"
-              value={formData.address}
-              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.row}>
-            <div className={styles.inputGroup}>
-              <label htmlFor={`${idPrefix}-city`} className={styles.fieldLabel}>City</label>
-              <input
-                type="text"
-                id={`${idPrefix}-city`}
-                placeholder="Tampa"
-                autoComplete="address-level2"
-                value={formData.city}
-                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                className={styles.input}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor={`${idPrefix}-zip`} className={styles.fieldLabel}>ZIP Code</label>
-              <input
-                type="text"
-                id={`${idPrefix}-zip`}
-                placeholder="33601"
-                autoComplete="postal-code"
-                value={formData.zip}
-                onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
-                className={styles.input}
-              />
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* ─── Step 3 — Property Type ─── */}
-      {step === 3 && (
         <div className={styles.inputGroup}>
           <span className={styles.fieldLabel}>What type of property is it?</span>
-          <div className={styles.typeGrid}>
+          <div className={styles.optionColumn}>
             {PROPERTY_TYPES.map((type) => (
               <button
                 key={type}
                 type="button"
-                className={`${styles.typePill} ${formData.propertyType === type ? styles.typePillActive : ""}`}
+                className={`${styles.optionBtn} ${formData.propertyType === type ? styles.optionBtnActive : ""}`}
                 onClick={() => setFormData({ ...formData, propertyType: type })}
               >
                 {type}
@@ -315,65 +233,65 @@ export default function EstimateForm({
         </div>
       )}
 
-      {/* ─── Step 4 — Bedrooms ─── */}
-      {step === 4 && (
+      {/* ─── Step 2 — Bedrooms ─── */}
+      {step === 2 && (
         <div className={styles.inputGroup}>
           <span className={styles.fieldLabel}>Number of bedrooms</span>
-          <div className={styles.chipRow}>
+          <div className={styles.optionColumn}>
             {BEDROOM_OPTIONS.map((n) => (
               <button
                 key={n}
                 type="button"
-                className={`${styles.chip} ${formData.bedrooms === n ? styles.chipActive : ""}`}
+                className={`${styles.optionBtn} ${formData.bedrooms === n ? styles.optionBtnActive : ""}`}
                 onClick={() => setFormData({ ...formData, bedrooms: n })}
               >
-                {n}
+                {n === "6+" ? "6 or more" : n} {n === "1" ? "Bedroom" : "Bedrooms"}
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* ─── Step 5 — Bathrooms ─── */}
-      {step === 5 && (
+      {/* ─── Step 3 — Bathrooms ─── */}
+      {step === 3 && (
         <div className={styles.inputGroup}>
           <span className={styles.fieldLabel}>Number of bathrooms</span>
-          <div className={styles.chipRow}>
+          <div className={styles.optionColumn}>
             {BATHROOM_OPTIONS.map((n) => (
               <button
                 key={n}
                 type="button"
-                className={`${styles.chip} ${formData.bathrooms === n ? styles.chipActive : ""}`}
+                className={`${styles.optionBtn} ${formData.bathrooms === n ? styles.optionBtnActive : ""}`}
                 onClick={() => setFormData({ ...formData, bathrooms: n })}
               >
-                {n}
+                {n === "4+" ? "4 or more" : n} {n === "1" ? "Bathroom" : "Bathrooms"}
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* ─── Step 6 — Square Footage ─── */}
-      {step === 6 && (
+      {/* ─── Step 4 — Square Footage ─── */}
+      {step === 4 && (
         <div className={styles.inputGroup}>
           <span className={styles.fieldLabel}>Approximate square footage</span>
-          <div className={styles.chipRow}>
+          <div className={styles.optionColumn}>
             {SQFT_OPTIONS.map((range) => (
               <button
                 key={range}
                 type="button"
-                className={`${styles.chip} ${formData.sqft === range ? styles.chipActive : ""}`}
+                className={`${styles.optionBtn} ${formData.sqft === range ? styles.optionBtnActive : ""}`}
                 onClick={() => setFormData({ ...formData, sqft: range })}
               >
-                {range}
+                {range} sq ft
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* ─── Step 7 — Select Your Service ─── */}
-      {step === 7 && (
+      {/* ─── Step 5 — Select Your Service ─── */}
+      {step === 5 && (
         <div className={styles.serviceList}>
           {SERVICES.map((service) => (
             <label
@@ -397,8 +315,8 @@ export default function EstimateForm({
         </div>
       )}
 
-      {/* ─── Step 8 — Help Us Estimate Your Home ─── */}
-      {step === 8 && (
+      {/* ─── Step 6 — Help Us Estimate Your Home ─── */}
+      {step === 6 && (
         <>
           <p className={styles.stepHint}>Choose one option:</p>
           <div className={styles.optionList}>
@@ -457,11 +375,11 @@ export default function EstimateForm({
         </>
       )}
 
-      {/* ─── Step 9 — Additional Information ─── */}
-      {step === 9 && (
+      {/* ─── Step 7 — Additional Information ─── */}
+      {step === 7 && (
         <div className={styles.inputGroup}>
           <label htmlFor={`${idPrefix}-additional`} className={styles.fieldLabel}>
-            Is there anything else you&apos;d like us to know?
+            Is there anything else you&apos;d like us to know? <em className={styles.optionalTag}>(optional)</em>
           </label>
           <textarea
             id={`${idPrefix}-additional`}
@@ -471,6 +389,107 @@ export default function EstimateForm({
             className={styles.textarea}
           ></textarea>
         </div>
+      )}
+
+      {/* ─── Step 8 — Property Address ─── */}
+      {step === 8 && (
+        <>
+          <div className={styles.inputGroup}>
+            <label htmlFor={`${idPrefix}-address`} className={styles.fieldLabel}>Property Address*</label>
+            <input
+              type="text"
+              id={`${idPrefix}-address`}
+              required
+              placeholder="Start typing your address..."
+              autoComplete="street-address"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.inputGroup}>
+              <label htmlFor={`${idPrefix}-city`} className={styles.fieldLabel}>City</label>
+              <input
+                type="text"
+                id={`${idPrefix}-city`}
+                placeholder="Tampa"
+                autoComplete="address-level2"
+                value={formData.city}
+                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor={`${idPrefix}-zip`} className={styles.fieldLabel}>ZIP Code</label>
+              <input
+                type="text"
+                id={`${idPrefix}-zip`}
+                placeholder="33601"
+                autoComplete="postal-code"
+                value={formData.zip}
+                onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
+                className={styles.input}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ─── Step 9 — Your Contact Details ─── */}
+      {step === 9 && (
+        <>
+          <div className={styles.inputGroup}>
+            <label htmlFor={`${idPrefix}-fullname`} className={styles.fieldLabel}>Full Name*</label>
+            <input
+              type="text"
+              id={`${idPrefix}-fullname`}
+              required
+              placeholder="Full Name"
+              value={formData.fullName}
+              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor={`${idPrefix}-phone`} className={styles.fieldLabel}>Phone Number*</label>
+            <PhoneInput
+              id={`${idPrefix}-phone`}
+              international
+              countryCallingCodeEditable={false}
+              defaultCountry="US"
+              placeholder="(813) 555-0100"
+              value={formData.phone}
+              onChange={(value) => setFormData({ ...formData, phone: value || "" })}
+              className={`${styles.phoneField} ${showPhoneError ? styles.phoneFieldError : ""}`}
+            />
+            {showPhoneError && (
+              <p className={styles.phoneError}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                Hmm… that phone number doesn&apos;t look right
+              </p>
+            )}
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor={`${idPrefix}-email`} className={styles.fieldLabel}>Email*</label>
+            <input
+              type="email"
+              id={`${idPrefix}-email`}
+              required
+              placeholder="name@example.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className={styles.input}
+            />
+          </div>
+        </>
       )}
 
       {/* Step Navigation */}

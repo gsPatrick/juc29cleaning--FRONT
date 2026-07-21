@@ -1,60 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Mission from "../Mission/Mission";
 import EstimateForm from "../EstimateForm/EstimateForm";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   // Video opens with the intro reveal animation and stays fullscreen — no scroll expand/contract.
-  const videoRef = useRef(null);
-
-  // Ping-pong playback: play forward, then reverse back to the start, and repeat —
-  // a seamless boomerang loop with no visible jump. Reverse is driven manually
-  // (native negative playbackRate isn't reliably supported) by stepping currentTime.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    let rafId;
-    let lastTs = null;
-
-    const stepReverse = (ts) => {
-      if (lastTs === null) lastTs = ts;
-      const dt = (ts - lastTs) / 1000;
-      lastTs = ts;
-
-      const next = video.currentTime - dt; // ~1x reverse speed
-      if (next <= 0) {
-        video.currentTime = 0;
-        lastTs = null;
-        video.play(); // resume forward
-        return;
-      }
-      video.currentTime = next;
-      rafId = requestAnimationFrame(stepReverse);
-    };
-
-    const onEnded = () => {
-      lastTs = null;
-      video.pause();
-      rafId = requestAnimationFrame(stepReverse);
-    };
-
-    video.addEventListener("ended", onEnded);
-    return () => {
-      video.removeEventListener("ended", onEnded);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   return (
     <section className={styles.experience} id="home">
       {/* Sticky video backdrop */}
       <div className={styles.videoBg}>
         <div className={`${styles.frame} ${styles.expanded}`}>
           <div className={styles.canvas}>
-            <video ref={videoRef} autoPlay muted playsInline className={styles.video}>
+            <video autoPlay loop muted playsInline className={styles.video}>
               <source src="/videos/hero.mp4" type="video/mp4" />
             </video>
           </div>
