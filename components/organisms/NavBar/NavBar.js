@@ -52,7 +52,7 @@ export default function NavBar() {
         <nav className={styles.navbar}>
           {/* Logo */}
           <Link href="/" className={styles.logo} onClick={closeMenu}>
-            <img src="/images/logo.png" alt="JUC29 Cleaning" className={styles.logoImg} />
+            <img src="/images/logo-mark.png" alt="JUC29 Cleaning" className={styles.logoImg} />
             <span className={styles.logoTagline}>Cleaning &amp; Carpet Care</span>
           </Link>
 
