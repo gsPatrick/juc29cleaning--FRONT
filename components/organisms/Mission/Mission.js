@@ -1,100 +1,78 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import styles from "./Mission.module.css";
 
-const STATEMENTS = [
-  "Cleanliness is more than a service — it is the foundation of mental clarity, comfort, and absolute well-being.",
-  "We combine meticulous, hand-crafted attention to detail with eco-safe products, delivering a standard of care that transforms your space.",
-  "Whether residential or commercial, JUC29 is dedicated to crafting a seamless, reliable, and premium experience from start to finish."
+const PILLARS = [
+  {
+    title: "More Time",
+    text: "Enjoy your weekends and the moments that matter.",
+    icon: (
+      <path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10" />
+    ),
+  },
+  {
+    title: "Less Stress",
+    text: "Come home to a fresh, organized space.",
+    icon: (
+      <>
+        <path d="M12 21c-3-2-5-5-5-8 0-2 1-4 5-8 4 4 5 6 5 8 0 3-2 6-5 8z" />
+        <path d="M12 21c-5 0-8-2-9-6 3 0 6 1 9 6zM12 21c5 0 8-2 9-6-3 0-6 1-9 6z" />
+      </>
+    ),
+  },
+  {
+    title: "A Happier Home",
+    text: "A cleaner home for a healthier, happier you.",
+    icon: (
+      <path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.7A4.5 4.5 0 0120 9c0 6-8 11-8 11z" />
+    ),
+  },
 ];
 
 export default function Mission() {
-  const sectionRef = useRef(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const el = sectionRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const scrolled = Math.min(Math.max(-rect.top, 0), scrollable);
-      setProgress(scrollable > 0 ? scrolled / scrollable : 0);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
-  const count = STATEMENTS.length;
-  const scaled = progress * count;
-  const active = Math.min(count - 1, Math.floor(scaled));
-  const local = scaled - active; // 0..1 within the active statement
-
   return (
-    <section ref={sectionRef} className={styles.section}>
-      <div className={styles.sticky}>
-        {/* Label Header */}
-        <div className={`container ${styles.head}`}>
+    <section className={styles.section}>
+      <div className={styles.photo} aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/about_interior.png" alt="" className={styles.photoImg} />
+      </div>
+
+      <div className={`container ${styles.inner}`}>
+        <div className={styles.copy}>
           <span className={styles.label}>✦ Our Mission</span>
-        </div>
 
-        {/* Scroll Progress Indicator Line */}
-        <div className={styles.progress}>
-          <div
-            className={styles.progressBar}
-            style={{ transform: `scaleX(${progress})` }}
-          />
-        </div>
+          <h2 className={styles.title}>
+            A clean home.
+            <span className={styles.accent}> A clearer mind.</span>
+            <br />
+            A better life.
+          </h2>
 
-        {/* Content Layout */}
-        <div className={`container ${styles.content}`}>
-          {/* Active Statement — left column */}
-          <div className={styles.main}>
-            {STATEMENTS.map((statement, si) => {
-              const isActive = si === active;
-              const chars = statement.split("");
-              const revealCount = isActive
-                ? local * chars.length
-                : si < active
-                ? chars.length
-                : 0;
+          <p className={styles.lead}>
+            We believe a clean home brings comfort, peace of mind, and more time
+            to enjoy what truly matters.
+          </p>
 
-              return (
-                <p
-                  key={si}
-                  className={styles.statement}
-                  style={{ opacity: isActive ? 1 : 0 }}
-                  aria-hidden={!isActive}
-                >
-                  {chars.map((ch, i) => (
-                    <span
-                      key={i}
-                      className={styles.char}
-                      style={{ opacity: i < revealCount ? 1 : 0.35 }}
-                    >
-                      {ch}
-                    </span>
-                  ))}
-                </p>
-              );
-            })}
-          </div>
-
-          {/* Index Circle — right column */}
-          <aside className={styles.index}>
-            <span>{String(active + 1).padStart(2, "0")}</span>
-            <span className={styles.indexDivider}>/</span>
-            <span className={styles.indexTotal}>
-              {String(count).padStart(2, "0")}
-            </span>
-          </aside>
+          <ul className={styles.pillars}>
+            {PILLARS.map((p) => (
+              <li key={p.title} className={styles.pillar}>
+                <span className={styles.iconWrap}>
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {p.icon}
+                  </svg>
+                </span>
+                <h3 className={styles.pillarTitle}>{p.title}</h3>
+                <p className={styles.pillarText}>{p.text}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

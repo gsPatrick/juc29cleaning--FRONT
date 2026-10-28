@@ -7,6 +7,7 @@ import styles from "./Hero.module.css";
 export default function Hero() {
   // Video opens with the intro reveal animation and stays fullscreen — no scroll expand/contract.
   return (
+    <>
     <section className={styles.experience} id="home">
       {/* Sticky video backdrop */}
       <div className={styles.videoBg}>
@@ -21,9 +22,11 @@ export default function Hero() {
 
       {/* Content overlay */}
       <div className={styles.overlay}>
-        {/* Tagline — sticky through the hero AND the mission scrollytelling */}
+        {/* Tagline — pinned for the duration of the hero */}
         <div className={styles.heroTaglinePin}>
-          <p className={styles.heroTagline}>Come home to a house that already feels ready.</p>
+          <div className={styles.heroTaglineSticky}>
+            <p className={styles.heroTagline}>Come home to a house that already feels ready.</p>
+          </div>
         </div>
 
         <div className={styles.heroGrid}>
@@ -50,16 +53,20 @@ export default function Hero() {
           {/* Left column — headline over the video */}
           <div className={styles.heroVisualSpacer}>
             <div className={styles.heroCopy}>
+              <div className={styles.heroCopyCard}>
               <h1 className={styles.heroHeadline}>Life&apos;s too short to spend it cleaning.</h1>
               <p className={styles.heroSubheadline}>
-                Professional home cleaning that gives you back your time, your weekends, and the peace of mind of always coming home to a beautifully cared-for home.
+                Professional home cleaning that gives you more time for what matters most. Enjoy your weekends and come home to a beautifully clean space.
               </p>
+              </div>
             </div>
           </div>
         </div>
-
-        <Mission />
       </div>
     </section>
+
+    {/* Outside the hero section so the sticky video scrolls away normally — no overlap */}
+    <Mission />
+    </>
   );
 }

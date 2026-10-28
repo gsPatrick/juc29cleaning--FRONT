@@ -217,19 +217,19 @@ export default function Reviews() {
       const track = trackRef.current;
       if (!el || !track) return;
 
-      const rect = el.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const scrolled = Math.min(Math.max(-rect.top, 0), scrollable);
-      const progress = scrollable > 0 ? scrolled / scrollable : 0;
+      // Horizontal distance the track has to travel
+      const maxScroll = Math.max(track.scrollWidth - window.innerWidth, 0);
 
-      // Calculate the maximum translate offset (track width minus window viewport width)
-      const maxScroll = track.scrollWidth - window.innerWidth;
-      
-      if (maxScroll > 0) {
-        setTranslateX(-progress * maxScroll);
-      } else {
-        setTranslateX(0);
-      }
+      // Same mechanics as Services: full-viewport sticky panel, with a vertical runway
+      // sized to the horizontal distance (≈2.2 px of card travel per px of scroll).
+      const pinnedDistance = maxScroll / 2.2;
+      el.style.height = `${window.innerHeight + pinnedDistance}px`;
+
+      const rect = el.getBoundingClientRect();
+      const scrolled = Math.min(Math.max(-rect.top, 0), pinnedDistance);
+      const progress = pinnedDistance > 0 ? scrolled / pinnedDistance : 0;
+
+      setTranslateX(-progress * maxScroll);
     };
 
     onScroll();

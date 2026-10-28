@@ -1,20 +1,21 @@
 .section {
   position: relative;
-  height: 200vh; /* Slowed down horizontal transition runway matching Services */
+  height: 250vh; /* Fallback — real runway is set from the track width in Reviews.js */
   background-color: #f7f7f5;
   color: var(--color-navy);
 }
 
 .sticky {
   position: sticky;
-  top: 12.5vh; /* Vertically centered sticky container (75vh height centered in 100vh viewport) */
-  height: 75vh;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: clamp(16px, 2vh, 24px);
-  padding-bottom: clamp(16px, 2vh, 24px);
+  justify-content: center; /* header + cards centred so the panel doesn't feel tall/empty */
+  padding-top: clamp(48px, 6vh, 64px);
+  padding-bottom: clamp(32px, 4vh, 48px);
 }
 
 /* Header */
@@ -55,7 +56,6 @@
   width: 100%;
   overflow: visible;
   margin-top: clamp(20px, 3.5vh, 40px);
-  margin-bottom: auto;
 }
 
 .track {
@@ -65,7 +65,7 @@
   width: max-content;
   padding-left: max(24px, calc((100vw - 1200px) / 2 + 24px));
   padding-right: 120px;
-  transition: transform 0.1s ease-out;
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 

@@ -54,16 +54,19 @@
   margin-top: -100dvh; /* must mirror .videoBg height exactly */
 }
 
-/* ─── Tagline — sticky viewport pin: visible through hero + mission ───── */
+/* ─── Tagline — stays put at the base of the hero's visible area, and leaves with the hero's bottom edge ── */
 .heroTaglinePin {
+  position: absolute; /* spans the hero overlay, no layout footprint */
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.heroTaglineSticky {
   position: sticky;
   top: 0;
   height: 100vh;
   height: 100dvh;
-  margin-bottom: -100vh; /* zero layout footprint — content below is unaffected */
-  margin-bottom: -100dvh;
-  z-index: 10;
-  pointer-events: none;
 }
 
 .heroTagline {
@@ -90,7 +93,7 @@
   grid-template-columns: 1fr 320px;
   gap: 0;
   align-items: stretch;
-  min-height: 130vh;
+  min-height: 150vh;
   padding-top: var(--nav-height-normal);
   padding-bottom: 48px;
   width: 100%;
@@ -123,9 +126,29 @@
 }
 
 .heroCopy {
+  /* Sticky + full-viewport height: text stays vertically centred while the hero scrolls */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  margin-top: calc(-1 * var(--nav-height-normal)); /* cancel grid padding-top so it starts centred */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  isolation: isolate;
   max-width: 620px;
-  padding: clamp(24px, 6vh, 96px) 24px 0 clamp(24px, 4vw, 72px);
+  padding: 0 24px 0 clamp(24px, 4vw, 72px);
   animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* Frosted glass panel behind the text — same treatment as the form card */
+.heroCopyCard {
+  background: rgba(140, 148, 156, 0.28);
+  backdrop-filter: blur(44px) saturate(1.1);
+  -webkit-backdrop-filter: blur(44px) saturate(1.1);
+  border-radius: 18px;
+  padding: 32px 32px 30px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 .heroHeadline {
@@ -144,8 +167,8 @@
   font-size: clamp(15px, 1.4vw, 19px);
   line-height: 1.55;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
   max-width: 520px;
   margin: 0;
 }
@@ -374,7 +397,7 @@
 
   .heroGrid {
     grid-template-columns: 1fr;
-    min-height: 130vh;
+    min-height: 150vh;
     padding-top: calc(var(--nav-height-normal) + 20px);
     padding-bottom: 48px;
     width: 100%;
@@ -396,6 +419,11 @@
   }
 
   .heroCopy {
+    /* Single column: form card sits below, so no sticky centring on mobile */
+    position: relative;
+    height: auto;
+    margin-top: 0;
+    display: block;
     max-width: 500px;
     padding: 8px 20px 24px;
     text-align: center;

@@ -1,30 +1,54 @@
 .section {
   position: relative;
-  height: 220vh;
-  /* Solid canvas background — matches every other section instead of the hero video.
-     z-index lifts it above the sticky hero tagline (z-index 10) so the panel cleanly
-     covers the video + tagline as it scrolls into view. */
   background-color: var(--color-canvas);
   color: var(--color-navy);
-  z-index: 11;
+  overflow: hidden;
+  box-shadow: 0 -14px 40px rgba(0, 55, 96, 0.05);
+  padding: clamp(44px, 6vw, 80px) 0;
 }
 
-.sticky {
-  position: sticky;
+/* Subtle divider between hero and Mission */
+.section::before {
+  content: '';
+  position: absolute;
   top: 0;
-  height: 100vh;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  padding-top: clamp(88px, 12vh, 140px);
-  padding-bottom: clamp(44px, 8vh, 88px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 70%);
+  height: 1px;
+  z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(158, 207, 132, 0.9), transparent);
 }
 
-.head {
-  margin-bottom: clamp(32px, 6vh, 60px);
+/* Photo fills the right side and dissolves into the canvas toward the text */
+.photo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 58%;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 42%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 42%);
 }
 
-/* Mission label capsule */
+.photoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.copy {
+  max-width: 560px;
+}
+
 .label {
   display: inline-flex;
   align-items: center;
@@ -32,132 +56,111 @@
   font-size: 13px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--color-accent-teal);
-  background-color: rgba(0, 55, 96, 0.04);
-  border: 1px solid rgba(0, 55, 96, 0.12);
+  color: #5f8a48;
+  background-color: rgba(158, 207, 132, 0.22);
   padding: 8px 16px;
   border-radius: 9999px;
+  margin-bottom: clamp(14px, 2vw, 20px);
 }
 
-.body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Progress bar tracking scrollytelling path */
-.progress {
-  position: relative;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(0, 55, 96, 0.12);
-  overflow: hidden;
-  margin-bottom: clamp(32px, 5vh, 44px);
-}
-
-.progressBar {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-accent-teal); /* Teal brand accent */
-  transform-origin: left center;
-  transition: transform 0.1s ease-out;
-}
-
-/* Flexbox/grid layouts: text on left, index on right */
-.content {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-  gap: 44px;
-  align-items: start;
-  padding-top: clamp(20px, 3vh, 32px);
-  position: relative;
-  z-index: 1;
-}
-
-/* Index Circle / Capsule */
-.index {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 6px;
-  width: fit-content;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-weight: 1;
-  letter-spacing: 0.05em;
-  color: var(--color-navy);
-  border: 1px solid rgba(0, 55, 96, 0.25);
-  border-radius: 20px;
-  padding: 12px 18px;
-}
-
-.indexDivider,
-.indexTotal {
-  color: rgba(0, 55, 96, 0.4);
-}
-
-/* Statements are absolute stacked for fade transitions */
-.main {
-  position: relative;
-  width: 100%;
-  min-height: clamp(220px, 42vh, 420px);
-  /* column order: text first (left) */
-  order: -1;
-}
-
-.statement {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* Constrain width so text breaks vertically, not into the right column */
-  width: 100%;
-  max-width: 42ch;
+.title {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.9rem);
-  line-height: 1.18;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
   letter-spacing: -0.02em;
   color: var(--color-navy);
-  text-wrap: pretty;
-  transition: opacity 0.3s ease;
+  margin-bottom: 16px;
 }
 
-.char {
-  transition: opacity 0.25s ease;
+.accent {
+  display: block;
+  background: linear-gradient(90deg, var(--color-accent-teal), #5f8a48);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Responsiveness overrides */
-@media (max-width: 1024px) {
-  .content {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+.lead {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(0, 55, 96, 0.75);
+  max-width: 46ch;
+  margin-bottom: clamp(22px, 3vw, 32px);
+}
 
-  .main {
-    min-height: clamp(260px, 50vh, 420px);
-  }
+.pillars {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(158, 207, 132, 0.22);
+  color: #5f8a48;
+  margin-bottom: 10px;
+}
+
+.pillarTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+}
+
+.pillarText {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: rgba(0, 55, 96, 0.7);
+  max-width: 16ch;
 }
 
 @media (max-width: 960px) {
-  /* Same sticky scrollytelling as desktop — tightened for a vertical single-column layout */
-  .content {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .photo {
+    position: relative;
+    width: 100%;
+    height: clamp(240px, 56vw, 360px);
+    margin-bottom: 24px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
   }
 
-  .statement {
-    font-size: clamp(1.35rem, 5.4vw, 1.9rem);
+  .section {
+    padding-top: 0;
+  }
+
+  .copy {
     max-width: 100%;
   }
 
-  .main {
-    min-height: clamp(200px, 38vh, 340px);
+  .lead {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pillars {
+    gap: 12px;
   }
 
-  .index {
-    font-size: 12px;
-    padding: 10px 14px;
+  .pillarText {
+    font-size: 0.8rem;
   }
 }
