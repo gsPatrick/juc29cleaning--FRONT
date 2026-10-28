@@ -1,7 +1,21 @@
 "use client";
 
-import EstimateForm from "../EstimateForm/EstimateForm";
 import styles from "./HomeEstimate.module.css";
+
+const STEPS = [
+  {
+    title: "Tell us about your home",
+    text: "Share the size, the rooms and what you need. It takes about two minutes.",
+  },
+  {
+    title: "Pick a day that suits you",
+    text: "We confirm your free quote and book a time that fits your week.",
+  },
+  {
+    title: "Come home to spotless",
+    text: "Our vetted team arrives on time, cleans every detail and leaves it ready.",
+  },
+];
 
 export default function HomeEstimate() {
   const handleBookNowClick = (e) => {
@@ -11,60 +25,40 @@ export default function HomeEstimate() {
 
   return (
     <section className={styles.section}>
-      {/* Background Video Layer */}
       <div className={styles.bgWrap}>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className={styles.bgImg}
-        >
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/estimate_bg.jpg" alt="" className={styles.bgImg} />
+        <div className={styles.bgShade} />
       </div>
 
-      {/* Full-bleed grid: no container — columns anchor to image edges */}
       <div className={styles.grid}>
-          {/* Left Column: Value Proposition */}
-          <div className={styles.contentCol}>
-            <span className={styles.topLabel}>Tampa Bay House Cleaning Services</span>
-            <h2 className={styles.heading}>
-              Spend your weekends living, not cleaning.
-            </h2>
-            <p className={styles.subheading}>
-              Professional Cleaning. Honest People. Outstanding Results.
-            </p>
-
-
-            <div className={styles.actionsRow}>
-              <button onClick={handleBookNowClick} className={styles.bookBtn}>
-                Get My Free Quote
-              </button>
-              <div className={styles.ratingsBadges}>
-                <div className={styles.avatars}>
-                  <span className={styles.avatar} style={{ backgroundColor: "#003760" }}>M</span>
-                  <span className={styles.avatar} style={{ backgroundColor: "#9ECF84" }}>O</span>
-                  <span className={styles.avatar} style={{ backgroundColor: "#96989A" }}>A</span>
-                </div>
-                <div className={styles.ratingText}>
-                  <span className={styles.star}>★</span> 4.9 Google <span className={styles.ratingDivider}>|</span> 153 reviews
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Middle: empty — image breathes through */}
-          <div aria-hidden="true" />
-
-          {/* Right Column: Request Free Quote Form */}
-          <div className={styles.formCol}>
-            <div className={styles.formCard}>
-              <h3 className={styles.formTitle}>Request Free Quote</h3>
-              <EstimateForm idPrefix="home-estimate" />
-            </div>
+        <div className={styles.contentCol}>
+          <span className={styles.topLabel}>✦ How It Works</span>
+          <h2 className={styles.heading}>
+            A spotless home is three simple steps away.
+          </h2>
+          <p className={styles.subheading}>
+            No contracts, no hassle. Just a clean home, on your schedule.
+          </p>
+          <div className={styles.actionsRow}>
+            <button onClick={handleBookNowClick} className={styles.bookBtn}>
+              Get My Free Quote
+            </button>
           </div>
         </div>
+
+        <ol className={styles.steps}>
+          {STEPS.map((step, i) => (
+            <li key={step.title} className={styles.step}>
+              <span className={styles.stepNumber}>{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className={styles.stepTitle}>{step.title}</h3>
+                <p className={styles.stepText}>{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }
