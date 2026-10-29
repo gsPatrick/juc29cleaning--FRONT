@@ -356,3 +356,10 @@
 .creatorLink:hover {
   opacity: 0.6;
 }
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
