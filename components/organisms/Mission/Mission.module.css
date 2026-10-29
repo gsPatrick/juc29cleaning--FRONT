@@ -52,9 +52,10 @@
 .label {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 13px;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #5f8a48;
   background-color: rgba(158, 207, 132, 0.22);
@@ -80,6 +81,10 @@
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+.line {
+  display: block;
 }
 
 .lead {

@@ -41,9 +41,8 @@ export default function Mission() {
 
           <h2 className={styles.title}>
             A clean home.
-            <span className={styles.accent}> A clearer mind.</span>
-            <br />
-            A better life.
+            <span className={styles.accent}>A clearer mind.</span>
+            <span className={styles.line}>A better life.</span>
           </h2>
 
           <p className={styles.lead}>

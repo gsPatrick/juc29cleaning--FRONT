@@ -33,6 +33,7 @@ export default function Hero() {
 
           {/* Right column — glass form card pinned to far right edge */}
           <div className={`${styles.heroContent} ${styles.heroContentExpanded}`}>
+            <div className={styles.cardSticky}>
             <div className={styles.formCard}>
               <div className={styles.cardHeader}>
                 <span className={styles.cardBadge}>✦ Free Quote</span>
@@ -47,6 +48,7 @@ export default function Hero() {
                 </svg>
                 Fully insured · No commitment
               </p>
+            </div>
             </div>
           </div>
 

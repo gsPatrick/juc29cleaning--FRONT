@@ -1,4 +1,5 @@
 import { Montserrat, Outfit } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import "react-phone-number-input/style.css";
 import NavBar from "@/components/organisms/NavBar/NavBar";
@@ -33,6 +34,14 @@ export default function RootLayout({ children }) {
         <Footer />
         <BookingModal />
         <PromoPopup />
+        {/* Housecall Pro chat bubble */}
+        <Script
+          id="housecall-pro-chat-bubble"
+          src="https://chat.housecallpro.com/proChat.js"
+          strategy="afterInteractive"
+          data-color="#b1dd8c"
+          data-organization="dbd67f80-d99d-4d89-ac0e-09d45f33b5b4"
+        />
       </body>
     </html>
   );

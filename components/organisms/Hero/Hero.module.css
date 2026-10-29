@@ -73,7 +73,7 @@
   position: absolute;
   bottom: 80px;
   left: 0;
-  right: 392px; /* form column (320px + 72px padding) — keeps the tagline clear of the card */
+  right: 0;
   text-align: center;
   font-family: var(--font-display);
   font-size: clamp(18px, 2.8vw, 38px);
@@ -81,7 +81,7 @@
   letter-spacing: 0.01em;
   color: #ffffff;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
-  white-space: normal;
+  white-space: nowrap;
   pointer-events: none;
   padding: 0 24px;
   margin: 0;
@@ -174,11 +174,21 @@
 }
 
 /* ─── Glass card — 100% transparent, pure backdrop blur ──────────────── */
+.cardSticky {
+  /* Same mechanics as .heroCopy: a full-viewport sticky wrapper, so the card is pinned and
+     released at exactly the same moments as the left copy */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  margin-top: calc(-1 * (var(--nav-height-normal) + 24px)); /* cancel grid + column padding */
+  /* Constant offset (independent of the card's height): below the header, above the tagline */
+  padding-top: max(152px, min(calc(62vh - 310px), calc(100vh - 800px)));
+}
+
 .formCard {
   width: 100%;
-  position: sticky;
-  /* Same spot as its natural position (nav + heroContent padding), so the card never shifts while scrolling */
-  top: calc(var(--nav-height-normal) + 24px);
+  position: relative;
   /* Neutral gray frosted glass — strong blur, no dark tint */
   background: rgba(140, 148, 156, 0.28);
   backdrop-filter: blur(44px) saturate(1.1);
@@ -390,7 +400,6 @@
   }
 
   .heroTagline {
-    right: 0;
     font-size: clamp(12px, 3.6vw, 16px);
     bottom: 22px;
     padding: 0 16px;
@@ -438,6 +447,13 @@
   .heroSubheadline {
     font-size: clamp(14px, 4vw, 16px);
     margin-inline: auto;
+  }
+
+  .cardSticky {
+    position: static;
+    height: auto;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .formCard {
