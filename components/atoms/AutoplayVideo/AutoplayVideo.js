@@ -67,6 +67,9 @@ export default function AutoplayVideo({
       playsInline
       preload="auto"
       poster={poster}
+      controls={false}
+      disablePictureInPicture
+      disableRemotePlayback
     >
       <source src={src} type="video/mp4" />
     </video>

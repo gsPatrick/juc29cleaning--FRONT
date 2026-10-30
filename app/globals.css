@@ -112,3 +112,16 @@ button:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* Background videos: never show the native play/pause button (Safari / iOS shows it when autoplay is blocked) */
+video::-webkit-media-controls,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

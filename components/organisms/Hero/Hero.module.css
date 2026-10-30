@@ -141,14 +141,25 @@
   animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
-/* Frosted glass panel behind the text — same treatment as the form card */
+/* Soft frosted glass behind the text: strongest over the letters, fading out toward the
+   empty areas so the photo shows through there */
 .heroCopyCard {
-  background: rgba(140, 148, 156, 0.28);
-  backdrop-filter: blur(44px) saturate(1.1);
-  -webkit-backdrop-filter: blur(44px) saturate(1.1);
-  border-radius: 18px;
+  position: relative;
+  isolation: isolate;
   padding: 32px 32px 30px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.heroCopyCard::before {
+  content: '';
+  position: absolute;
+  inset: -28px -48px -36px -48px;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(140, 148, 156, 0.2);
+  backdrop-filter: blur(26px) saturate(1.05);
+  -webkit-backdrop-filter: blur(26px) saturate(1.05);
+  -webkit-mask-image: radial-gradient(ellipse 62% 66% at 36% 46%, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 62% 66% at 36% 46%, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 100%);
 }
 
 .heroHeadline {
