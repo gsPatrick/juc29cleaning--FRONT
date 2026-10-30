@@ -1,5 +1,6 @@
 "use client";
 
+import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
 import { useEffect, useState } from "react";
 import styles from "./AboutUs.module.css";
 
@@ -23,7 +24,7 @@ const TABS_DATA = [
     title: "100% Pure Botanical Clean",
     description: "We use only premium, plant-derived, biodegradable cleaning formulations. Enjoy an immaculate home with zero synthetic residues, harsh chemical fumes, or allergens.",
     type: "video",
-    src: "/videos/hero.mp4"
+    src: "/videos/hero-1080.mp4"
   }
 ];
 
@@ -136,15 +137,7 @@ export default function AboutUs() {
                     style={{ opacity: isActive ? 1 : 0 }}
                   >
                     {tab.type === "video" ? (
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className={styles.mediaElement}
-                      >
-                        <source src={tab.src} type="video/mp4" />
-                      </video>
+                      <AutoplayVideo src={tab.src} className={styles.mediaElement} />
                     ) : (
                       <img
                         src={tab.src}

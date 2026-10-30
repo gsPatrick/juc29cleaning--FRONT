@@ -1,5 +1,6 @@
 "use client";
 
+import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
 import styles from "./page.module.css";
 
 // Real 5-star customer reviews for JUC29 Cleaning. Service tags are derived from
@@ -185,9 +186,7 @@ export default function ReviewsPage() {
 
       {/* Hero */}
       <section className={styles.hero}>
-        <video autoPlay loop muted playsInline className={styles.heroVideo}>
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+        <AutoplayVideo className={styles.heroVideo} />
         <div className="container">
           <div className={styles.heroInner}>
             <span className={styles.heroLabel}>✦ Client Testimonials</span>

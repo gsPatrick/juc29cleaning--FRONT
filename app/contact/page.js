@@ -1,5 +1,6 @@
 "use client";
 
+import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
 import { useState } from "react";
 import EstimateForm from "@/components/organisms/EstimateForm/EstimateForm";
 import styles from "./page.module.css";
@@ -65,9 +66,7 @@ export default function ContactPage() {
 
       {/* Hero */}
       <section className={styles.hero}>
-        <video autoPlay loop muted playsInline className={styles.heroVideo}>
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+        <AutoplayVideo className={styles.heroVideo} />
         <div className="container">
           <div className={styles.heroInner}>
             <span className={styles.heroLabel}>✦ Get In Touch</span>

@@ -1,5 +1,6 @@
 "use client";
 
+import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
 import Mission from "../Mission/Mission";
 import EstimateForm from "../EstimateForm/EstimateForm";
 import styles from "./Hero.module.css";
@@ -13,9 +14,7 @@ export default function Hero() {
       <div className={styles.videoBg}>
         <div className={`${styles.frame} ${styles.expanded}`}>
           <div className={styles.canvas}>
-            <video autoPlay loop muted playsInline className={styles.video}>
-              <source src="/videos/hero.mp4" type="video/mp4" />
-            </video>
+            <AutoplayVideo className={styles.video} />
           </div>
         </div>
       </div>

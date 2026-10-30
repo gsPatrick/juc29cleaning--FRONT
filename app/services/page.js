@@ -1,5 +1,6 @@
 "use client";
 
+import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
 import Services from "@/components/organisms/Services/Services";
 import ServicesDetail from "@/components/organisms/ServicesDetail/ServicesDetail";
 import styles from "./page.module.css";
@@ -10,9 +11,7 @@ export default function ServicesPage() {
 
       {/* ── Hero — clean video, same treatment as the other pages ── */}
       <section className={styles.hero}>
-        <video autoPlay loop muted playsInline className={styles.heroVideo}>
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+        <AutoplayVideo className={styles.heroVideo} />
 
         <div className="container">
           <div className={styles.heroInner}>

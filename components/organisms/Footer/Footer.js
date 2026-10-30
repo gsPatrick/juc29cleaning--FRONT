@@ -1,5 +1,6 @@
 "use client";
 
+import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
 import { useState } from "react";
 import styles from "./Footer.module.css";
 
@@ -106,9 +107,7 @@ export default function Footer() {
       <div className={styles.revealWrap} aria-hidden="true">
         <div className={styles.revealInner}>
           <div className={styles.gradientOverlay} />
-          <video autoPlay loop muted playsInline className={styles.videoBg}>
-            <source src="/videos/hero.mp4" type="video/mp4" />
-          </video>
+          <AutoplayVideo className={styles.videoBg} />
           <div className={styles.revealBar}>
             <span>© {new Date().getFullYear()} JUC29. All Rights Reserved.</span>
             <span>
