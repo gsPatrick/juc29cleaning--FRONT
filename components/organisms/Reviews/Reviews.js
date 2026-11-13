@@ -192,10 +192,13 @@ function CheckIcon() {
   );
 }
 
+const STICKY_TOP = 96; // keep in sync with .sticky top in the CSS (clears the fixed header)
+
 export default function Reviews() {
   const [reviews, setReviews] = useState(INITIAL_REVIEWS);
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  const stickyRef = useRef(null);
 
   // Hook 1: Prepared to pull reviews from Google Places API in real time.
   useEffect(() => {
@@ -216,7 +219,8 @@ export default function Reviews() {
   useEffect(() => {
     const el = sectionRef.current;
     const track = trackRef.current;
-    if (!el || !track) return;
+    const panel = stickyRef.current;
+    if (!el || !track || !panel) return;
 
     let maxScroll = 0;
     let pinnedDistance = 0;
@@ -228,13 +232,15 @@ export default function Reviews() {
       // Full-viewport sticky panel with a vertical runway sized to that distance
       // (≈2.2 px of card travel per px of scroll).
       pinnedDistance = maxScroll / 2.2;
-      el.style.height = `${window.innerHeight + pinnedDistance}px`;
+      // The pinned panel is only as tall as its content, so tall screens do not
+      // leave a big empty gap above the title.
+      el.style.height = `${panel.offsetHeight + pinnedDistance}px`;
     };
 
     const update = () => {
       ticking = false;
       const top = el.getBoundingClientRect().top;
-      const scrolled = Math.min(Math.max(-top, 0), pinnedDistance);
+      const scrolled = Math.min(Math.max(STICKY_TOP - top, 0), pinnedDistance);
       const progress = pinnedDistance > 0 ? scrolled / pinnedDistance : 0;
       track.style.transform = `translate3d(${-progress * maxScroll}px, 0, 0)`;
     };
@@ -258,6 +264,7 @@ export default function Reviews() {
     // Fonts/images can change the track width after first paint
     const ro = new ResizeObserver(onResize);
     ro.observe(track);
+    ro.observe(panel);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
@@ -267,7 +274,7 @@ export default function Reviews() {
 
   return (
     <section ref={sectionRef} id="reviews" className={styles.section}>
-      <div className={styles.sticky}>
+      <div ref={stickyRef} className={styles.sticky}>
         
         {/* Section Header */}
         <div className="container">

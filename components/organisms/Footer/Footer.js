@@ -1,3 +1,5 @@
+/* Plain anchors on purpose: in-page links are animated by SmoothAnchors. */
+/* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
 import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
@@ -16,92 +18,62 @@ export default function Footer() {
     <>
       <footer id="contact" className={styles.footer}>
         <div className={styles.container}>
-          
-          <div className={styles.top}>
-            {/* Left Brand Col */}
+
+          <div className={styles.grid}>
+            {/* Brand */}
             <div className={styles.brand}>
-              <img src="/images/logo.jpeg" alt="JUC29" className={styles.logo} />
-              <p className={styles.brandDesc}>
-                Professional home cleaning in Tampa Bay.
-              </p>
+              <img src="/images/logo.jpeg" alt="JUC29 Cleaning" className={styles.logo} />
+              <p className={styles.brandDesc}>Professional home cleaning in Tampa Bay.</p>
             </div>
 
-            {/* Middle Sitemap Links */}
-            <div className={styles.links}>
-              <div className={styles.linksGroup}>
-                <span className={styles.groupTitle}>Programs</span>
-                <a href="/#services" className={styles.link}>Deep Cleaning</a>
-                <a href="/#services" className={styles.link}>Recurring Cleaning</a>
-                <a href="/#services" className={styles.link}>Move-In / Move-Out</a>
-                <a href="/#services" className={styles.link}>Commercial Cleaning</a>
-                <a href="/#services" className={styles.link}>Post-Construction</a>
-                <a href="/#services" className={styles.link}>Carpet & Upholstery</a>
-              </div>
-              <div className={styles.linksGroup}>
-                <span className={styles.groupTitle}>Navigation</span>
-                <a href="/" className={styles.link}>Home</a>
-                <a href="/#why-us" className={styles.link}>Why Us</a>
-                <a href="/#before-after" className={styles.link}>Before & After</a>
-                <a href="/#reviews" className={styles.link}>Reviews</a>
-                <a href="/#contact" className={styles.link}>Contact</a>
-                <a href="/privacy" className={styles.link}>Privacy Policy</a>
-                <a href="/terms" className={styles.link}>Terms of Service</a>
-              </div>
-            </div>
+            {/* Services */}
+            <nav className={styles.col} aria-label="Services">
+              <h3 className={styles.colTitle}>Services</h3>
+              <a href="/#services" className={styles.link}>Deep Cleaning</a>
+              <a href="/#services" className={styles.link}>Recurring Cleaning</a>
+              <a href="/#services" className={styles.link}>Move-In / Move-Out</a>
+              <a href="/#services" className={styles.link}>Commercial Cleaning</a>
+              <a href="/#services" className={styles.link}>Post-Construction</a>
+              <a href="/#services" className={styles.link}>Carpet &amp; Upholstery</a>
+            </nav>
 
-            {/* Right Action Column */}
-            <div className={styles.actions}>
-              <span className={styles.groupTitle}>Bookings</span>
-              <button onClick={handleBookNow} className={styles.bookLink}>
-                <span>Get Your Free Quote Now</span>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={styles.arrowIcon}>
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
-            </div>
-          </div>
+            {/* Company */}
+            <nav className={styles.col} aria-label="Company">
+              <h3 className={styles.colTitle}>Company</h3>
+              <a href="/" className={styles.link}>Home</a>
+              <a href="/#why-us" className={styles.link}>Why Us</a>
+              <a href="/#before-after" className={styles.link}>Before &amp; After</a>
+              <a href="/#reviews" className={styles.link}>Reviews</a>
+            </nav>
 
-          {/* Social & Contact — sits before the video reveal layer */}
-          <div className={styles.social}>
-            <div className={styles.socialLeft}>
-              <span className={styles.groupTitle}>Connect</span>
-              <div className={styles.socialRow}>
-                <a
-                  href="sms:+17279008730"
-                  aria-label="Text us"
-                  className={styles.socialIcon}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
-                  </svg>
-                </a>
-                <a
-                  href="mailto:support@juc29cleaning.com"
-                  aria-label="Email"
-                  className={styles.socialIcon}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                    <path d="m22 7-10 6L2 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            <div className={styles.contactLinks}>
-              <a href="sms:+17279008730" className={styles.emailLink}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {/* Contact */}
+            <div className={styles.col}>
+              <h3 className={styles.colTitle}>Contact</h3>
+              <a href="sms:+17279008730" className={styles.contactLink}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
                 </svg>
                 (727) 900-8730
               </a>
-              <a href="mailto:support@juc29cleaning.com" className={styles.emailLink}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <a href="mailto:support@juc29cleaning.com" className={styles.contactLink}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="m22 7-10 6L2 7" />
                 </svg>
                 support@juc29cleaning.com
               </a>
+              <button onClick={handleBookNow} className={styles.quoteBtn}>
+                Get My Free Quote
+              </button>
+            </div>
+          </div>
+
+          {/* Legal */}
+          <div className={styles.legal}>
+            <span>Tampa Bay, FL</span>
+            <div className={styles.legalLinks}>
+              <a href="/privacy" className={styles.legalLink}>Privacy Policy</a>
+              <a href="/terms" className={styles.legalLink}>Terms of Service</a>
             </div>
           </div>
 

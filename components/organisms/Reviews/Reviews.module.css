@@ -7,15 +7,10 @@
 
 .sticky {
   position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100dvh;
+  top: 96px; /* clears the fixed header; mirrored by STICKY_TOP in Reviews.js */
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* header + cards centred so the panel doesn't feel tall/empty */
-  padding-top: clamp(48px, 6vh, 64px);
-  padding-bottom: clamp(32px, 4vh, 48px);
+  padding-top: clamp(24px, 4vh, 48px);
+  padding-bottom: clamp(32px, 5vh, 64px);
 }
 
 /* Header */
