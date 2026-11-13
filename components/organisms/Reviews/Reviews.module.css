@@ -65,7 +65,6 @@
   width: max-content;
   padding-left: max(24px, calc((100vw - 1200px) / 2 + 24px));
   padding-right: 120px;
-  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 

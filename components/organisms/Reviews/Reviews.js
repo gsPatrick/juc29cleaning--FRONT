@@ -196,7 +196,6 @@ export default function Reviews() {
   const [reviews, setReviews] = useState(INITIAL_REVIEWS);
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
-  const [translateX, setTranslateX] = useState(0);
 
   // Hook 1: Prepared to pull reviews from Google Places API in real time.
   useEffect(() => {
@@ -210,36 +209,61 @@ export default function Reviews() {
     fetchGoogleReviews();
   }, []);
 
-  // Hook 2: Handles the horizontal scroll translation linking vertical scroll progress.
+  // Hook 2: horizontal translation driven by vertical scroll progress.
+  // No React state per scroll tick: the transform is written straight to the DOM
+  // inside requestAnimationFrame, and the section height (runway) is only
+  // recomputed on mount/resize — not on every scroll event.
   useEffect(() => {
-    const onScroll = () => {
-      const el = sectionRef.current;
-      const track = trackRef.current;
-      if (!el || !track) return;
+    const el = sectionRef.current;
+    const track = trackRef.current;
+    if (!el || !track) return;
 
+    let maxScroll = 0;
+    let pinnedDistance = 0;
+    let ticking = false;
+
+    const measure = () => {
       // Horizontal distance the track has to travel
-      const maxScroll = Math.max(track.scrollWidth - window.innerWidth, 0);
-
-      // Same mechanics as Services: full-viewport sticky panel, with a vertical runway
-      // sized to the horizontal distance (≈2.2 px of card travel per px of scroll).
-      const pinnedDistance = maxScroll / 2.2;
+      maxScroll = Math.max(track.scrollWidth - window.innerWidth, 0);
+      // Full-viewport sticky panel with a vertical runway sized to that distance
+      // (≈2.2 px of card travel per px of scroll).
+      pinnedDistance = maxScroll / 2.2;
       el.style.height = `${window.innerHeight + pinnedDistance}px`;
-
-      const rect = el.getBoundingClientRect();
-      const scrolled = Math.min(Math.max(-rect.top, 0), pinnedDistance);
-      const progress = pinnedDistance > 0 ? scrolled / pinnedDistance : 0;
-
-      setTranslateX(-progress * maxScroll);
     };
 
-    onScroll();
+    const update = () => {
+      ticking = false;
+      const top = el.getBoundingClientRect().top;
+      const scrolled = Math.min(Math.max(-top, 0), pinnedDistance);
+      const progress = pinnedDistance > 0 ? scrolled / pinnedDistance : 0;
+      track.style.transform = `translate3d(${-progress * maxScroll}px, 0, 0)`;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    const onResize = () => {
+      measure();
+      update();
+    };
+
+    measure();
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
+    // Fonts/images can change the track width after first paint
+    const ro = new ResizeObserver(onResize);
+    ro.observe(track);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
+      ro.disconnect();
     };
-  }, [reviews]); // Recompute if reviews state changes
+  }, [reviews]);
 
   return (
     <section ref={sectionRef} id="reviews" className={styles.section}>
@@ -264,7 +288,6 @@ export default function Reviews() {
           <div
             ref={trackRef}
             className={styles.track}
-            style={{ transform: `translateX(${translateX}px)` }}
           >
             {reviews.map((review, index) => (
               <div key={index} className={styles.card}>

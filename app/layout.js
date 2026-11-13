@@ -6,6 +6,7 @@ import NavBar from "@/components/organisms/NavBar/NavBar";
 import Footer from "@/components/organisms/Footer/Footer";
 import BookingModal from "@/components/organisms/BookingModal/BookingModal";
 import PromoPopup from "@/components/organisms/PromoPopup/PromoPopup";
+import SmoothAnchors from "@/components/atoms/SmoothAnchors/SmoothAnchors";
 import { SITE_URL, SITE_NAME, LEGAL_NAME, PHONE, EMAIL } from "@/lib/site";
 
 const montserrat = Montserrat({
@@ -55,6 +56,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${montserrat.variable} ${outfit.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <SmoothAnchors />
         <NavBar />
         {children}
         <Footer />
