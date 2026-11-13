@@ -125,3 +125,6 @@ video::-webkit-media-controls-enclosure {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* Landing page: anchor targets clear the fixed header */
+section[id], footer[id] { scroll-margin-top: 96px; }

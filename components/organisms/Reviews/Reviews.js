@@ -251,7 +251,10 @@ export default function Reviews() {
             <span className={styles.label}>✦ Google Reviews</span>
             <h2 className={styles.title}>What our clients say.</h2>
             <p className={styles.lead}>
-              Average rating 5.0 in Tampa Bay, backed by verified Google Business reviews.
+              Real reviews from our Tampa Bay clients on Google.{" "}
+              <a href="https://share.google/pnumtUaEIpCiU2ZTc" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline", fontWeight: 600 }}>
+                See all reviews on Google
+              </a>
             </p>
           </div>
         </div>

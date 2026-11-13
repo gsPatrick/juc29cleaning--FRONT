@@ -14,7 +14,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className={styles.footer}>
+      <footer id="contact" className={styles.footer}>
         <div className={styles.container}>
           
           <div className={styles.top}>
@@ -30,20 +30,20 @@ export default function Footer() {
             <div className={styles.links}>
               <div className={styles.linksGroup}>
                 <span className={styles.groupTitle}>Programs</span>
-                <a href="/services" className={styles.link}>Deep Cleaning</a>
-                <a href="/services" className={styles.link}>Recurring Cleaning</a>
-                <a href="/services" className={styles.link}>Move-In / Move-Out</a>
-                <a href="/services" className={styles.link}>Commercial Cleaning</a>
-                <a href="/services" className={styles.link}>Post-Construction</a>
-                <a href="/services" className={styles.link}>Carpet & Upholstery</a>
+                <a href="/#services" className={styles.link}>Deep Cleaning</a>
+                <a href="/#services" className={styles.link}>Recurring Cleaning</a>
+                <a href="/#services" className={styles.link}>Move-In / Move-Out</a>
+                <a href="/#services" className={styles.link}>Commercial Cleaning</a>
+                <a href="/#services" className={styles.link}>Post-Construction</a>
+                <a href="/#services" className={styles.link}>Carpet & Upholstery</a>
               </div>
               <div className={styles.linksGroup}>
                 <span className={styles.groupTitle}>Navigation</span>
                 <a href="/" className={styles.link}>Home</a>
-                <a href="/why-us" className={styles.link}>Why Us</a>
-                <a href="/before-after" className={styles.link}>Before & After</a>
-                <a href="/reviews" className={styles.link}>Reviews</a>
-                <a href="/contact" className={styles.link}>Contact</a>
+                <a href="/#why-us" className={styles.link}>Why Us</a>
+                <a href="/#before-after" className={styles.link}>Before & After</a>
+                <a href="/#reviews" className={styles.link}>Reviews</a>
+                <a href="/#contact" className={styles.link}>Contact</a>
                 <a href="/privacy" className={styles.link}>Privacy Policy</a>
                 <a href="/terms" className={styles.link}>Terms of Service</a>
               </div>

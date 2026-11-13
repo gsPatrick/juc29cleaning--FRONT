@@ -59,10 +59,10 @@ export default function NavBar() {
           {/* Desktop Navigation Links */}
           <div className={styles.navLinks}>
             <Link href="/" className={styles.navLink}>Home</Link>
-            <Link href="/services" className={styles.navLink}>Services</Link>
-            <Link href="/why-us" className={styles.navLink}>Why Us</Link>
-            <Link href="/reviews" className={styles.navLink}>Reviews</Link>
-            <Link href="/contact" className={styles.navLink}>Contact</Link>
+            <Link href="/#services" className={styles.navLink}>Services</Link>
+            <Link href="/#why-us" className={styles.navLink}>Why Us</Link>
+            <Link href="/#reviews" className={styles.navLink}>Reviews</Link>
+            <Link href="/#contact" className={styles.navLink}>Contact</Link>
           </div>
 
           {/* CTA Action */}
@@ -89,10 +89,10 @@ export default function NavBar() {
       <div className={`${styles.mobileDrawer} ${menuOpen ? styles.mobileDrawerActive : ""}`}>
         <div className={styles.mobileLinks}>
           <Link href="/" className={styles.mobileNavLink} onClick={closeMenu}>Home</Link>
-          <Link href="/services" className={styles.mobileNavLink} onClick={closeMenu}>Services</Link>
-          <Link href="/why-us" className={styles.mobileNavLink} onClick={closeMenu}>Why Us</Link>
-          <Link href="/reviews" className={styles.mobileNavLink} onClick={closeMenu}>Reviews</Link>
-          <Link href="/contact" className={styles.mobileNavLink} onClick={closeMenu}>Contact</Link>
+          <Link href="/#services" className={styles.mobileNavLink} onClick={closeMenu}>Services</Link>
+          <Link href="/#why-us" className={styles.mobileNavLink} onClick={closeMenu}>Why Us</Link>
+          <Link href="/#reviews" className={styles.mobileNavLink} onClick={closeMenu}>Reviews</Link>
+          <Link href="/#contact" className={styles.mobileNavLink} onClick={closeMenu}>Contact</Link>
           <button onClick={handleBookNow} className={`${styles.ctaButton} ${styles.mobileCta}`}>
             Get My Free Quote
           </button>
