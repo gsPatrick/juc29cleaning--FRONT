@@ -17,7 +17,7 @@ const TABS_DATA = [
     title: "Vetted Hospitality Crew",
     description: "We hire for character and train for perfection. Every detailer is background-checked, fully insured, and operates under our strict 35+ checkpoint quality audit.",
     type: "image",
-    src: "/images/about_interior.png"
+    src: "/images/premium_living.png"
   },
   {
     index: "03",

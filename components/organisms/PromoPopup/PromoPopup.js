@@ -103,7 +103,7 @@ export default function PromoPopup() {
             <span className={styles.off}>OFF</span>
           </h2>
 
-          <p className={styles.subhead}>For first-time clients</p>
+          <p className={styles.subhead}>New clients only · All services</p>
 
           <div className={styles.codeRow}>
             <span className={styles.codeLabel}>Use code</span>

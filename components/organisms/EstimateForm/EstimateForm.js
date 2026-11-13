@@ -489,6 +489,11 @@ export default function EstimateForm({
               className={styles.input}
             />
           </div>
+          <p style={{ fontSize: "12px", lineHeight: 1.5, opacity: 0.7, margin: 0 }}>
+            By requesting a quote you agree to our{" "}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>Privacy Policy</a>{" "}and{" "}
+            <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "underline" }}>Terms of Service</a>.
+          </p>
         </>
       )}
 

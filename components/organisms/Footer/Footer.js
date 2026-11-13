@@ -22,7 +22,7 @@ export default function Footer() {
             <div className={styles.brand}>
               <img src="/images/logo.jpeg" alt="JUC29" className={styles.logo} />
               <p className={styles.brandDesc}>
-                Surgical-grade detailing for premium architectural spaces in Tampa Bay.
+                Professional home cleaning in Tampa Bay.
               </p>
             </div>
 
@@ -30,10 +30,12 @@ export default function Footer() {
             <div className={styles.links}>
               <div className={styles.linksGroup}>
                 <span className={styles.groupTitle}>Programs</span>
-                <a href="/services" className={styles.link}>Regular Clean</a>
-                <a href="/services" className={styles.link}>Deep Clean</a>
-                <a href="/services" className={styles.link}>Turnover Care</a>
-                <a href="/services" className={styles.link}>Construction</a>
+                <a href="/services" className={styles.link}>Deep Cleaning</a>
+                <a href="/services" className={styles.link}>Recurring Cleaning</a>
+                <a href="/services" className={styles.link}>Move-In / Move-Out</a>
+                <a href="/services" className={styles.link}>Commercial Cleaning</a>
+                <a href="/services" className={styles.link}>Post-Construction</a>
+                <a href="/services" className={styles.link}>Carpet & Upholstery</a>
               </div>
               <div className={styles.linksGroup}>
                 <span className={styles.groupTitle}>Navigation</span>
@@ -41,6 +43,9 @@ export default function Footer() {
                 <a href="/why-us" className={styles.link}>Why Us</a>
                 <a href="/before-after" className={styles.link}>Before & After</a>
                 <a href="/reviews" className={styles.link}>Reviews</a>
+                <a href="/contact" className={styles.link}>Contact</a>
+                <a href="/privacy" className={styles.link}>Privacy Policy</a>
+                <a href="/terms" className={styles.link}>Terms of Service</a>
               </div>
             </div>
 
@@ -109,7 +114,7 @@ export default function Footer() {
           <div className={styles.gradientOverlay} />
           <AutoplayVideo className={styles.videoBg} />
           <div className={styles.revealBar}>
-            <span>© {new Date().getFullYear()} JUC29. All Rights Reserved.</span>
+            <span>© {new Date().getFullYear()} JUC29 Corp Cleaning. All Rights Reserved.</span>
             <span>
               Developed by{" "}
               <a href="https://codebypatrick.dev/" target="_blank" rel="noopener noreferrer" className={styles.creatorLink}>

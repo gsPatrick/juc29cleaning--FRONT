@@ -3,7 +3,8 @@
    ===================================================== */
 
 .page {
-  /* Let the Hero start at the top of the screen under the transparent navbar */
+  /* Clears the fixed navbar now that the page has no hero banner */
+  padding-top: calc(var(--nav-height-normal) + 8px);
 }
 
 /* ───────────────────────── HERO ───────────────────────── */

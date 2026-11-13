@@ -35,7 +35,7 @@ const SERVICES = [
   },
 ];
 
-export default function Services() {
+export default function Services({ headingTag: Heading = "h2" }) {
   // Opens the side booking form (same event used by the header and hero buttons)
   const openBooking = () => {
     window.dispatchEvent(new CustomEvent("open-booking"));
@@ -46,9 +46,9 @@ export default function Services() {
       <div className="container">
         <header className={styles.header}>
           <span className={styles.label}>Our Services</span>
-          <h2 className={styles.title}>
+          <Heading className={styles.title}>
             <span className={styles.accent}>Cleaning</span> tailored to your lifestyle.
-          </h2>
+          </Heading>
           <p className={styles.lead}>
             Thoughtful care for every home, every need, and every occasion.
           </p>

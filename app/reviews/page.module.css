@@ -294,3 +294,28 @@
     flex-wrap: wrap;
   }
 }
+
+/* ===================== STANDARDIZED CARDS / MORE ===================== */
+.reviewerName { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--color-navy); }
+.reviewerLocation, .serviceTag { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.02em; text-transform: none; }
+.reviewText { font-family: var(--font-sans); font-size: 15px; line-height: 1.65; font-style: normal; }
+.reviewCard { padding: 28px; gap: 16px; }
+.cardBottom { margin-top: auto; }
+
+.heroActions { margin-top: 20px; }
+.heroLink {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+  color: #fff; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 2px;
+}
+.heroLink:hover { border-bottom-color: #fff; }
+
+.moreRow { display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 40px; }
+.moreBtn {
+  font-family: var(--font-sans); font-size: 16px; font-weight: 600;
+  padding: 14px 32px; border-radius: 9999px; cursor: pointer;
+  background: var(--color-navy); color: #fff; border: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.moreBtn:hover { transform: translateY(-2px); opacity: 0.92; }
+.googleLink { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: #5f8a48; text-decoration: underline; text-underline-offset: 3px; }

@@ -6,7 +6,7 @@ import styles from "./BeforeAfter.module.css";
 const EXAMPLES = [
   {
     title: "Kitchen Range Restoration",
-    desc: "Surgical removal of grease, carbon, and burnt-on residue from stainless steel stove cooktops.",
+    desc: "Removes grease, carbon, and burnt-on residue from stainless steel stove cooktops.",
     beforeImg: "/images/kitchen_before.png",
     afterImg: "/images/kitchen_after.png",
     beforeStyle: {}
@@ -31,13 +31,6 @@ const EXAMPLES = [
     beforeImg: "/images/baseboards_before.png",
     afterImg: "/images/baseboards_after.png",
     beforeStyle: {}
-  },
-  {
-    title: "Hardwood Floor Polishing",
-    desc: "Restorative gloss floor buffing removing matte scuffs, fine dust, and footprint oil haze.",
-    beforeImg: "/images/about_interior.png",
-    afterImg: "/images/about_interior.png",
-    beforeStyle: { filter: "grayscale(0.25) contrast(0.85) brightness(0.8) sepia(0.1) blur(0.7px)" }
   }
 ];
 
@@ -97,7 +90,7 @@ export default function BeforeAfter() {
           <span className={styles.label}>✦ Visual Proof</span>
           <h2 className={styles.title}>Transformations, Detailed.</h2>
           <p className={styles.lead}>
-            Slide or hover to inspect the surgical precision of our restorative kitchen stove, grout, glass, and baseboard detailing programs.
+            Slide to see the difference.
           </p>
         </div>
 

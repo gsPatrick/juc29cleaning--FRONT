@@ -1,7 +1,12 @@
 "use client";
 
 import AutoplayVideo from "@/components/atoms/AutoplayVideo/AutoplayVideo";
+import { useState } from "react";
 import styles from "./page.module.css";
+
+const PAGE_SIZE = 6;
+// JUC29 Google Business Profile (link provided by the client)
+const GOOGLE_REVIEWS_URL = "https://share.google/pnumtUaEIpCiU2ZTc";
 
 // Real 5-star customer reviews for JUC29 Cleaning. Service tags are derived from
 // each review's own text; no locations or dates are invented.
@@ -181,6 +186,9 @@ function StarRating({ rating }) {
 }
 
 export default function ReviewsPage() {
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  const shown = REVIEWS.slice(0, visible);
+  const average = (REVIEWS.reduce((n, r) => n + r.rating, 0) / REVIEWS.length).toFixed(1);
   return (
     <main className={styles.page}>
 
@@ -196,37 +204,24 @@ export default function ReviewsPage() {
             </h1>
             <div className={styles.heroRating}>
               <StarRating rating={5} />
-              <span className={styles.heroRatingText}>5.0 average across 20+ verified Google reviews</span>
+              <span className={styles.heroRatingText}>{average} average · {REVIEWS.length} Google reviews</span>
+            </div>
+            <div className={styles.heroActions}>
+              <a className={styles.heroLink} href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer">
+                See all reviews on Google
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
             </div>
           </div>
         </div>
         <div className={styles.heroAccent}></div>
       </section>
 
-      {/* Google Badge Strip */}
-      <div className={styles.badge}>
-        <div className="container">
-          <div className={styles.badgeInner}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-            </svg>
-            <span className={styles.badgeText}>Verified Google Business Reviews · Tampa Bay Area</span>
-            <div className={styles.badgeScore}>
-              <span className={styles.badgeStars}>★★★★★</span>
-              <span className={styles.badgeNum}>5.0</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Reviews Grid */}
       <section className={styles.grid}>
         <div className="container">
           <div className={styles.reviewsGrid}>
-            {REVIEWS.map((review, i) => (
+            {shown.map((review, i) => (
               <div key={i} className={styles.reviewCard}>
                 <div className={styles.cardTop}>
                   <div className={styles.avatar} style={{ background: review.color }}>
@@ -234,7 +229,7 @@ export default function ReviewsPage() {
                   </div>
                   <div className={styles.reviewer}>
                     <span className={styles.reviewerName}>{review.name}</span>
-                    <span className={styles.reviewerLocation}>Verified Google Review</span>
+                    <span className={styles.reviewerLocation}>Google review</span>
                   </div>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.googleLogo}>
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -250,6 +245,17 @@ export default function ReviewsPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className={styles.moreRow}>
+            {visible < REVIEWS.length && (
+              <button className={styles.moreBtn} onClick={() => setVisible((v) => v + PAGE_SIZE)}>
+                Show more reviews
+              </button>
+            )}
+            <a className={styles.googleLink} href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer">
+              Read all reviews on Google
+            </a>
           </div>
         </div>
       </section>
