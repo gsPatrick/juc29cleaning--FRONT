@@ -17,7 +17,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1.3fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(28px, 4vw, 56px);
   align-items: start;
 }
@@ -29,10 +29,10 @@
 }
 
 .logo {
-  height: clamp(56px, 6vw, 72px);
+  height: 76px;
   width: auto;
   align-self: flex-start;
-  border-radius: 4px;
+  margin-left: -12px; /* the image has built-in white margin; aligns the mark with the text edge */
 }
 
 .brandDesc {
@@ -40,7 +40,7 @@
   font-size: 15px;
   line-height: 1.55;
   color: rgba(0, 55, 96, 0.7);
-  max-width: 240px;
+  text-wrap: balance;
 }
 
 .col {
