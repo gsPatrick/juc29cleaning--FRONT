@@ -262,6 +262,20 @@
   opacity: 0.8;
 }
 
+/* ─── Mobile: the video is a normal block under the footer ───────────────
+   A fixed layer behind the page misbehaves on mobile browsers (address bar
+   resizing, sideways overflow), so no parallax reveal on small screens. */
+@media (max-width: 767px) {
+  .footer {
+    margin-bottom: 0;
+  }
+
+  .revealWrap {
+    position: relative;
+    z-index: auto;
+  }
+}
+
 /* ─── Mobile: centered footer content ────────────────────────────────── */
 @media (max-width: 767px) {
   .top {
