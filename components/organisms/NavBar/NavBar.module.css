@@ -249,7 +249,9 @@
   height: 100vh;
   background: #ffffff;
   z-index: 998;
-  transform: translateY(-100%);
+  /* The header's entry animation makes it the containing block (top: 16px), so a plain
+     -100% leaves the drawer's bottom 16px showing as a white strip at the top. */
+  transform: translateY(calc(-100% - 32px));
   transition: transform var(--transition-slow);
   display: none;
   align-items: center;
@@ -257,7 +259,7 @@
 }
 
 .mobileDrawerActive {
-  transform: translateY(0);
+  transform: translateY(-16px); /* cancels the header's 16px offset so it covers the whole screen */
 }
 
 .mobileLinks {

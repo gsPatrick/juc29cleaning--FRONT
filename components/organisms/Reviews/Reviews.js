@@ -192,6 +192,7 @@ function CheckIcon() {
   );
 }
 
+const MOBILE_QUERY = "(max-width: 767px)"; // keep in sync with the CSS: below this the reviews are a vertical list
 const STICKY_TOP = 96; // keep in sync with .sticky top in the CSS (clears the fixed header)
 
 export default function Reviews() {
@@ -226,7 +227,16 @@ export default function Reviews() {
     let pinnedDistance = 0;
     let ticking = false;
 
+    const isMobile = () => window.matchMedia(MOBILE_QUERY).matches;
+
     const measure = () => {
+      if (isMobile()) {
+        // Vertical list on phones: no runway, no horizontal movement
+        maxScroll = 0;
+        pinnedDistance = 0;
+        el.style.height = "";
+        return;
+      }
       // Horizontal distance the track has to travel
       maxScroll = Math.max(track.scrollWidth - window.innerWidth, 0);
       // Full-viewport sticky panel with a vertical runway sized to that distance
@@ -239,6 +249,10 @@ export default function Reviews() {
 
     const update = () => {
       ticking = false;
+      if (isMobile()) {
+        track.style.transform = "";
+        return;
+      }
       const top = el.getBoundingClientRect().top;
       const scrolled = Math.min(Math.max(STICKY_TOP - top, 0), pinnedDistance);
       const progress = pinnedDistance > 0 ? scrolled / pinnedDistance : 0;

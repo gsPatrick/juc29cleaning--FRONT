@@ -276,30 +276,42 @@
   }
 }
 
-/* ─── Mobile: centered footer content ────────────────────────────────── */
+/* ─── Mobile: everything centered ────────────────────────────────────── */
 @media (max-width: 767px) {
-  .top {
-    align-items: center;
+  .grid {
     text-align: center;
+    justify-items: center;
   }
 
   .brand {
     align-items: center;
-    margin-inline: auto;
   }
 
   .logo {
     align-self: center;
+    margin-left: 0; /* the desktop offset only compensates the left edge */
   }
 
-  .links {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .actions {
+  .col {
     align-items: center;
-    max-width: none;
+  }
+
+  .col:last-child {
+    grid-column: 1 / -1; /* Contact gets its own centered row */
+  }
+
+  .contactLink {
+    justify-content: center;
+  }
+
+  .legal {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .legalLinks {
+    justify-content: center;
   }
 }
 

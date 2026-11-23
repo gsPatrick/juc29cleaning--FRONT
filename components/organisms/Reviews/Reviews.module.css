@@ -181,6 +181,46 @@
   flex-shrink: 0;
 }
 
+/* Phones: plain vertical list instead of the scroll-driven horizontal slide */
+@media (max-width: 767px) {
+  .section {
+    height: auto !important; /* beats the runway height set from JS */
+  }
+
+  .sticky {
+    position: static;
+    min-height: 0;
+    display: block;
+    overflow: visible;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .sticky .header {
+    margin-inline: auto;
+    padding-right: 0; /* beats the 960px rule further down */
+    text-align: center;
+  }
+
+  .trackContainer .track {
+    flex-direction: column;
+    width: auto;
+    gap: 16px;
+    padding: 0 var(--spacing-container-x, 20px); /* equal on both sides; beats the 960px rule below */
+    transform: none !important;
+  }
+
+  .track .card {
+    width: 100%; /* beats the 960px card width further down */
+    min-height: 0;
+  }
+
+  /* Show the first six; the Google link above covers the rest */
+  .card:nth-child(n + 7) {
+    display: none;
+  }
+}
+
 /* Responsiveness overrides */
 @media (max-width: 960px) {
   /* Same sticky + scroll-driven horizontal slide as desktop —
